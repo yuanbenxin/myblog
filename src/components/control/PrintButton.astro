@@ -1,0 +1,231 @@
+---
+import { Icon } from "astro-icon/components";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+
+interface Props {
+	class?: string;
+}
+
+const className = Astro.props.class ?? "";
+---
+
+<button
+    id="print-this-page-btn"
+    type="button"
+    aria-label={i18n(I18nKey.printThisPage)}
+    class:list={["print-this-page-btn no-print transition flex items-center justify-center gap-1.5 rounded-lg px-3 h-9 bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)] text-[var(--btn-content)] dark:text-white/75 text-sm font-medium", className]}
+>
+    <Icon name="material-symbols:print-outline-rounded" class="text-[1.1rem]" />
+    <span>{i18n(I18nKey.printThisPage)}</span>
+</button>
+
+<script>
+    // Print the right-side content area (including the license card but excluding
+    // this button itself). The on-screen theme is NEVER changed — only the printed
+    // output is forced to light mode via @media print CSS. A4 page sizing is also
+    // handled via CSS.
+    const initPrintButton = () => {
+        const btn = document.getElementById('print-this-page-btn');
+        if (!btn) return;
+
+        // Avoid binding twice after Swup replaces the page
+        if ((btn as HTMLElement).dataset.printBound) return;
+        (btn as HTMLElement).dataset.printBound = '1';
+
+        btn.addEventListener('click', () => {
+            // Mark the document so we can apply print-only styling to the live page
+            // before the browser snapshots it for the print preview. We do NOT touch
+            // the `dark` class — the on-screen theme stays exactly as the user left it.
+            document.documentElement.classList.add('printing');
+
+            // Let the browser apply the .printing rules, then open the dialog.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    const restore = () => {
+                        document.documentElement.classList.remove('printing');
+                        window.removeEventListener('afterprint', restore);
+                    };
+                    window.addEventListener('afterprint', restore);
+                    // Fallback in case afterprint never fires
+                    setTimeout(restore, 60000);
+                    window.print();
+                });
+            });
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPrintButton);
+    } else {
+        initPrintButton();
+    }
+
+    // Re-bind after Swup page transitions
+    document.addEventListener('swup:content:replace', initPrintButton);
+    document.addEventListener('swup:page:view', initPrintButton);
+</script>
+
+<style is:global>
+    /* ===== Print-time light mode override =====
+       These rules apply ONLY while the print dialog is open (html.printing).
+       They do not affect the on-screen theme — the `dark` class on <html> is
+       intentionally left untouched. We override CSS variables so the printed /
+       previewed output always looks like the light theme. */
+    html.printing {
+        --page-bg: #ffffff !important;
+        --card-bg: #ffffff !important;
+        --btn-regular-bg: #f5f5f5 !important;
+        --btn-regular-bg-hover: #eeeeee !important;
+        --btn-regular-bg-active: #e0e0e0 !important;
+        --btn-card-bg-hover: #f8f8f8 !important;
+        --btn-card-bg-active: #f0f0f0 !important;
+        --btn-plain-bg-hover: #f5f5f5 !important;
+        --btn-plain-bg-active: #eeeeee !important;
+        --btn-content: #000000 !important;
+        --license-block-bg: #f8f8f8 !important;
+        --float-panel-bg: #ffffff !important;
+        --codeblock-bg: #f5f5f5 !important;
+        --codeblock-topbar-bg: #eeeeee !important;
+        --line-divider: rgba(0, 0, 0, 0.12) !important;
+        --line-color: rgba(0, 0, 0, 0.15) !important;
+        --link-underline: rgba(0, 0, 0, 0.3) !important;
+        --inline-code-bg: #f5f5f5 !important;
+        --deep-text: #000000 !important;
+        --title-active: #000000 !important;
+    }
+    /* Force pure black text in print preview regardless of dark mode */
+    html.printing body,
+    html.printing #post-container,
+    html.printing .card-base {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+    html.printing body * {
+        color: #000000 !important;
+    }
+    html.printing a {
+        color: #1a73e8 !important;
+    }
+    html.printing code,
+    html.printing pre,
+    html.printing blockquote {
+        background-color: #f5f5f5 !important;
+        color: #000000 !important;
+        border-color: #e0e0e0 !important;
+    }
+    html.printing code,
+    html.printing pre,
+    html.printing pre code,
+    html.printing .expressive-code {
+        font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace !important;
+    }
+
+    @media print {
+        @page {
+            size: A4;
+            margin: 14mm 12mm;
+        }
+        html, body {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        /* Hide everything that's not the post content */
+        #banner-wrapper,
+        #banner-content,
+        #navbar-wrapper,
+        #top-row,
+        #sidebar-wrapper,
+        #sidebar,
+        #sidebar-sticky,
+        #toc-wrapper,
+        #toc,
+        .footer,
+        #back-to-top-btn,
+        .no-print,
+        .post-nav,
+        #page-height-extend,
+        #banner-credit {
+            display: none !important;
+        }
+
+        /* Reset the layout so the post container sits at the top-left of the page
+           with no transform / grid offset / banner padding. The main content wrapper
+           uses `position: absolute` with a `top` offset for the banner — we must
+           neutralize that, plus every ancestor up to body, or the first page is blank. */
+        body {
+            position: static !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        /* Reset every ancestor of #post-wrapper: the absolute main-content wrapper
+           (has inline `top`), its relative child, and the grid. */
+        body > .absolute,
+        body > .absolute > .relative,
+        #main-grid,
+        #content-wrapper,
+        #swup-container,
+        #post-wrapper {
+            position: static !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: none !important;
+            display: block !important;
+        }
+        #main-grid {
+            grid-template-columns: 1fr !important;
+            grid-column: auto !important;
+        }
+        #post-wrapper {
+            overflow: visible !important;
+            border-radius: 0 !important;
+        }
+        #post-container,
+        #post-container.card-base,
+        .card-base {
+            box-shadow: none !important;
+            border: none !important;
+            background: #ffffff !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            transform: none !important;
+            position: static !important;
+            border-radius: 0 !important;
+        }
+
+        /* Avoid awkward breaks inside key elements */
+        #post-container h1,
+        #post-container h2,
+        #post-container h3,
+        #post-container h4,
+        #post-container h5,
+        #post-container h6 {
+            page-break-after: avoid;
+            break-after: avoid-page;
+        }
+        #post-container p,
+        #post-container li,
+        #post-container blockquote,
+        #post-container pre,
+        #post-container figure,
+        #post-container table,
+        #post-container .license-container {
+            page-break-inside: avoid;
+            break-inside: avoid-page;
+        }
+        #post-container img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        a {
+            color: #1a73e8 !important;
+            text-decoration: underline;
+        }
+    }
+</style>

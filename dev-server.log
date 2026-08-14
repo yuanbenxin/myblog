@@ -1,0 +1,200 @@
+
+> fuwari@0.0.1 dev D:\DevData\myblog
+> astro dev
+
+17:38:15 [types] Generated 3ms
+17:38:17 [content] Syncing content
+17:38:21 [content] Synced content
+
+ astro  v5.13.10 ready in 28321 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+
+17:38:21 watching for file changes...
+
+ update  ▶ New version of Astro available: 7.2.1
+  Run pnpm dlx @astrojs/upgrade to update
+
+17:38:53 [200] /about/ 7841ms
+17:38:53 [200] /archive/ 7905ms
+17:38:53 [200] / 6939ms
+17:39:01 [404] /.netlify/functions/card-proxy 14ms
+17:39:02 [200] /about/ 131ms
+17:39:02 [404] /.netlify/functions/card-proxy 3ms
+17:39:05 [200] /about/ 108ms
+18:26:23 [200] /about/ 182ms
+18:26:26 [200] /archive/ 233ms
+18:26:57 [watch] src/content/spec/about.md
+18:26:57 [watch] src/content/spec/about.md
+18:26:57 [glob-loader] Reloaded data from about.md
+18:26:59 [watch] src/content/spec/about.md
+18:26:59 [watch] src/content/spec/about.md
+18:26:59 [glob-loader] Reloaded data from about.md
+18:27:01 [watch] src/content/spec/about.md
+18:27:01 [watch] src/content/spec/about.md
+18:27:01 [glob-loader] Reloaded data from about.md
+18:27:03 [200] /about/ 2949ms
+18:27:03 [200] /about/ 2950ms
+18:27:03 [200] /about/ 2951ms
+18:27:03 [200] /about/ 2118ms
+18:27:04 [watch] src/content/spec/about.md
+18:27:04 [watch] src/content/spec/about.md
+18:27:04 [glob-loader] Reloaded data from about.md
+18:27:06 [200] /about/ 4410ms
+18:27:07 [200] /about/ 1051ms
+18:27:07 [200] /about/ 583ms
+18:27:08 [404] /.netlify/functions/card-proxy 4ms
+18:27:12 [200] /about/ 406ms
+18:27:21 [200] /archive/ 111ms
+18:27:21 [200] /archive/ 257ms
+18:27:31 [watch] src/content/spec/about.md
+18:27:31 [watch] src/content/spec/about.md
+18:27:31 [watch] src/content/spec/about.md
+18:27:31 [watch] src/content/spec/about.md
+18:27:31 [glob-loader] Reloaded data from about.md
+18:27:31 [glob-loader] Reloaded data from about.md
+18:27:34 [200] /about/ 1188ms
+18:27:34 [200] /about/ 1328ms
+18:27:37 [watch] src/content/spec/about.md
+18:27:37 [watch] src/content/spec/about.md
+18:27:37 [glob-loader] Reloaded data from about.md
+18:27:40 [watch] src/content/spec/about.md
+18:27:40 [watch] src/content/spec/about.md
+18:27:40 [glob-loader] Reloaded data from about.md
+18:27:40 [200] /about/ 1347ms
+18:27:51 [watch] src/content/spec/about.md
+18:27:51 [watch] src/content/spec/about.md
+18:27:51 [glob-loader] Reloaded data from about.md
+18:27:53 [watch] src/content/spec/about.md
+18:27:53 [watch] src/content/spec/about.md
+18:27:53 [glob-loader] Reloaded data from about.md
+18:27:55 [watch] src/content/spec/about.md
+18:27:55 [watch] src/content/spec/about.md
+18:27:55 [watch] src/content/spec/about.md
+18:27:55 [watch] src/content/spec/about.md
+18:27:55 [glob-loader] Reloaded data from about.md
+18:27:55 [glob-loader] Reloaded data from about.md
+18:27:59 [200] /about/ 5724ms
+18:27:59 [200] /about/ 4603ms
+18:27:59 [200] /about/ 1693ms
+18:27:59 [200] /about/ 1695ms
+18:27:59 [200] /about/ 1008ms
+18:28:00 [404] /.netlify/functions/card-proxy 3ms
+18:28:03 [watch] src/content/spec/about.md
+18:28:03 [watch] src/content/spec/about.md
+18:28:03 [glob-loader] Reloaded data from about.md
+18:28:06 [200] /about/ 1350ms
+18:28:07 [404] /.netlify/functions/card-proxy 2ms
+18:28:07 [watch] src/content/spec/about.md
+18:28:07 [watch] src/content/spec/about.md
+18:28:07 [glob-loader] Reloaded data from about.md
+18:28:10 [watch] src/content/spec/about.md
+18:28:10 [watch] src/content/spec/about.md
+18:28:10 [glob-loader] Reloaded data from about.md
+18:28:12 [watch] src/content/spec/about.md
+18:28:12 [watch] src/content/spec/about.md
+18:28:12 [glob-loader] Reloaded data from about.md
+18:28:14 [200] /about/ 4247ms
+18:28:15 [200] /about/ 3735ms
+18:28:15 [watch] src/content/spec/about.md
+18:28:15 [watch] src/content/spec/about.md
+18:28:15 [glob-loader] Reloaded data from about.md
+18:28:15 [200] /about/ 2146ms
+18:28:15 [200] /about/ 351ms
+18:28:16 [404] /.netlify/functions/card-proxy 3ms
+18:28:20 [watch] src/content/spec/about.md
+18:28:20 [watch] src/content/spec/about.md
+18:28:20 [glob-loader] Reloaded data from about.md
+18:28:24 [200] /about/ 1360ms
+18:28:24 [200] /about/ 726ms
+18:28:24 [404] /.netlify/functions/card-proxy 2ms
+18:28:25 [watch] src/content/spec/about.md
+18:28:25 [watch] src/content/spec/about.md
+18:28:25 [glob-loader] Reloaded data from about.md
+18:28:28 [watch] src/content/spec/about.md
+18:28:28 [watch] src/content/spec/about.md
+18:28:28 [glob-loader] Reloaded data from about.md
+18:28:28 [200] /about/ 950ms
+18:28:28 [200] /about/ 194ms
+18:28:29 [404] /.netlify/functions/card-proxy 4ms
+18:28:31 [watch] src/content/spec/about.md
+18:28:31 [watch] src/content/spec/about.md
+18:28:31 [watch] src/content/spec/about.md
+18:28:31 [watch] src/content/spec/about.md
+18:28:31 [glob-loader] Reloaded data from about.md
+18:28:31 [glob-loader] Reloaded data from about.md
+18:28:33 [watch] src/content/spec/about.md
+18:28:33 [watch] src/content/spec/about.md
+18:28:33 [watch] src/content/spec/about.md
+18:28:33 [watch] src/content/spec/about.md
+18:28:33 [glob-loader] Reloaded data from about.md
+18:28:33 [glob-loader] Reloaded data from about.md
+18:28:36 [200] /about/ 2060ms
+18:28:36 [200] /about/ 2053ms
+18:28:36 [200] /about/ 916ms
+18:28:37 [404] /.netlify/functions/card-proxy 3ms
+18:28:37 [watch] src/content/spec/about.md
+18:28:37 [watch] src/content/spec/about.md
+18:28:37 [glob-loader] Reloaded data from about.md
+18:28:40 [watch] src/content/spec/about.md
+18:28:40 [watch] src/content/spec/about.md
+18:28:40 [watch] src/content/spec/about.md
+18:28:40 [watch] src/content/spec/about.md
+18:28:40 [glob-loader] Reloaded data from about.md
+18:28:40 [glob-loader] Reloaded data from about.md
+18:28:42 [200] /about/ 717ms
+18:28:42 [200] /about/ 474ms
+18:28:44 [404] /.netlify/functions/card-proxy 2ms
+18:28:46 [200] /about/ 34ms
+18:30:32 [200] /archive/ 47ms
+18:30:34 [200] /archive/ 51ms
+18:30:36 [200] /archive/ 40ms
+18:30:37 [200] /archive/ 29ms
+18:30:38 [200] /archive/ 29ms
+18:31:23 [watch] src/content/spec/about.md
+18:31:23 [watch] src/content/spec/about.md
+18:31:23 [glob-loader] Reloaded data from about.md
+18:31:25 [200] /about/ 445ms
+18:31:25 [404] /.netlify/functions/card-proxy 1ms
+18:31:29 [watch] src/content/spec/about.md
+18:31:29 [watch] src/content/spec/about.md
+18:31:29 [glob-loader] Reloaded data from about.md
+18:31:31 [200] /about/ 702ms
+18:31:32 [404] /.netlify/functions/card-proxy 2ms
+18:31:41 [watch] src/content/spec/about.md
+18:31:41 [watch] src/content/spec/about.md
+18:31:41 [glob-loader] Reloaded data from about.md
+18:31:43 [200] /about/ 581ms
+18:31:43 [404] /.netlify/functions/card-proxy 3ms
+18:31:47 [watch] src/content/spec/about.md
+18:31:47 [watch] src/content/spec/about.md
+18:31:47 [glob-loader] Reloaded data from about.md
+18:31:48 [watch] src/content/spec/about.md
+18:31:48 [watch] src/content/spec/about.md
+18:31:48 [glob-loader] Reloaded data from about.md
+18:31:49 [200] /about/ 608ms
+18:31:49 [200] /about/ 463ms
+18:31:50 [404] /.netlify/functions/card-proxy 2ms
+18:31:52 [watch] src/content/spec/about.md
+18:31:52 [watch] src/content/spec/about.md
+18:31:52 [glob-loader] Reloaded data from about.md
+18:31:54 [200] /about/ 449ms
+18:31:54 [404] /.netlify/functions/card-proxy 1ms
+18:31:55 [watch] src/content/spec/about.md
+18:31:55 [watch] src/content/spec/about.md
+18:31:55 [glob-loader] Reloaded data from about.md
+18:31:57 [watch] src/content/spec/about.md
+18:31:57 [watch] src/content/spec/about.md
+18:31:57 [glob-loader] Reloaded data from about.md
+18:31:57 [200] /about/ 1083ms
+18:31:58 [404] /.netlify/functions/card-proxy 1ms
+18:31:58 [watch] src/content/spec/about.md
+18:31:58 [watch] src/content/spec/about.md
+18:31:58 [glob-loader] Reloaded data from about.md
+18:32:01 [200] /about/ 1095ms
+18:32:02 [404] /.netlify/functions/card-proxy 3ms
+18:32:02 [404] /.netlify/functions/card-proxy 1ms
+18:32:09 [200] /about/ 33ms
+18:32:19 [200] /archive/ 56ms
+18:32:19 [200] /archive/ 54ms
