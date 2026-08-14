@@ -28,9 +28,14 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
+// site/base can be overridden via env vars (used by the GitHub Pages workflow).
+// Defaults keep local dev on "/" with a placeholder site origin.
+const site = process.env.SITE || "https://aboutme.sukina.workers.dev/";
+const base = process.env.BASE || "/";
+
 export default defineConfig({
-	site: "https://aboutme.sukina.workers.dev/",
-	base: "/",
+	site: site,
+	base: base,
 	trailingSlash: "always",
 	devToolbar: {
 		enabled: false,
