@@ -4,7 +4,7 @@ published: 2026-08-14
 description: Sukina-Character通用角色扮演大模型的训练方法
 tags: ['Sukina', 'LLM_Training']
 category: Notes
-draft: true
+draft: false
 ---
 # Sukina-Character的后训练方法论
 Sukina-Lab即将推出的最主流对话模型——`Sukina-Character`，出于诸多考量，其训练过程虽然不需要从头预训练，但是它后训练的策略却与传统的仅进行微调或者微调后直接强化学习，有着较为显著的差异
