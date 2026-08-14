@@ -32,3 +32,6 @@ yarn.lock
 
 dev-server.log
 *.log
+
+.trae/
+.vscode/
