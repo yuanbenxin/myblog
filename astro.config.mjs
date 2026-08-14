@@ -14,6 +14,7 @@ import remarkDirective from "remark-directive"; /* Handle directives */
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
+import { visit } from "unist-util-visit";
 import { expressiveCodeConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
@@ -32,6 +33,15 @@ import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 // Defaults keep local dev on "/" with a placeholder site origin.
 const site = process.env.SITE || "https://aboutme.sukina.workers.dev/";
 const base = process.env.BASE || "/";
+
+// Add loading="lazy" to all <img> elements for native lazy loading
+const rehypeLazyImages = () => (tree) => {
+	visit(tree, "element", (node) => {
+		if (node.tagName === "img" && node.properties) {
+			node.properties.loading = "lazy";
+		}
+	});
+};
 
 export default defineConfig({
 	site: site,
@@ -124,6 +134,7 @@ export default defineConfig({
 			parseDirectiveNode,
 		],
 		rehypePlugins: [
+			rehypeLazyImages,
 			rehypeKatex,
 			rehypeSlug,
 			[
