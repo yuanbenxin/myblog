@@ -117,5 +117,22 @@
         overflow-x: auto;
         margin: 1em 0;
     }
-    
+
+    /* 超宽表格横向滚动容器：JS 会将 table 包裹到 .table-wrapper 中 */
+    .table-wrapper {
+        overflow-x: auto;
+        max-width: 100%;
+        margin: 1em 0;
+    }
+    .table-wrapper > table {
+        margin: 0;
+    }
+    /* 表格内链接恢复为 inline 并允许在长 URL 中换行，
+       避免 inline-block 链接把所在列撑宽，触发表格列被等比压缩 */
+    .table-wrapper a {
+        display: inline !important;
+        word-break: break-all;
+        overflow-wrap: anywhere;
+    }
+
 }

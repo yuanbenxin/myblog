@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《被操纵的男人》中文大纲 · 章节核心观点与论据总结</title>
+<style>
+:root {
+  --bg: #faf7f1;
+  --bg2: #f1ebe0;
+  --ink: #2a2622;
+  --muted: #6f665c;
+  --rule: #ddd3c3;
+  --accent: #9a3b2e;
+  --accent2: #a8843f;
+  --serif: 'Crimson Pro', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', serif;
+  --sans: 'Instrument Sans', 'Noto Sans CJK SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --mono: 'IBM Plex Mono', 'Noto Sans Mono CJK SC', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ===== Cover ===== */
+.cover {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 72px; height: 4px;
+  background: var(--accent);
+}
+.cover .kicker {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 1.4rem;
+}
+.cover h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+.cover h1 .en {
+  display: block;
+  font-size: 0.42em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-top: 0.6rem;
+}
+.cover .sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto 2rem;
+}
+.cover .meta {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.cover .meta b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ===== Section headings ===== */
+.part {
+  margin: 5rem 0 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.part .part-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 0.5rem;
+}
+.part h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+.part .part-desc {
+  color: var(--muted);
+  max-width: 720px;
+}
+
+h3.chapter {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 3rem 0 0.4rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent);
+  line-height: 1.3;
+}
+h3.chapter .no {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent2);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+h3.chapter .en {
+  display: block;
+  font-size: 0.55em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+/* ===== Core viewpoint callout ===== */
+.thesis {
+  background: var(--bg2);
+  border-left: 4px solid var(--accent2);
+  padding: 1rem 1.3rem;
+  margin: 1rem 0 1.2rem;
+  border-radius: 0 6px 6px 0;
+}
+.thesis .label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--accent2);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+.thesis p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.thesis p strong { color: var(--accent); }
+
+/* ===== Argument list ===== */
+.args { margin: 0 0 1.5rem; }
+.args h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 1.2rem 0 0.6rem;
+  letter-spacing: 0.02em;
+}
+.args ul { list-style: none; }
+.args ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+.args ul li::before {
+  content: '';
+  position: absolute;
+  left: 0.15rem; top: 0.62em;
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.75;
+}
+.args ul li b { color: var(--ink); }
+.args ul li .en {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.92em;
+}
+
+/* ===== Prose ===== */
+p.body { margin: 0.9rem 0; color: var(--ink); }
+p.body .key {
+  background: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+.quote {
+  border-left: 3px solid var(--rule);
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  margin: 1.2rem 0;
+  color: var(--muted);
+  font-style: italic;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+}
+
+/* ===== Tables ===== */
+.table-wrap {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 600px;
+  margin: 1.5rem 0;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 640px;
+}
+thead th {
+  background: var(--ink);
+  color: var(--bg);
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody td {
+  padding: 0.7rem 0.9rem;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+}
+tbody tr:nth-child(even) { background: var(--bg2); }
+tbody td .no {
+  font-family: var(--mono);
+  color: var(--accent2);
+  font-size: 0.85rem;
+}
+tbody td b { color: var(--accent); }
+
+/* ===== Figures ===== */
+figure.diagram { margin: 2rem 0; text-align: center; }
+figure.diagram figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+}
+/* mermaid 未渲染成功时，图表源码以代码块样式展示 */
+pre.mermaid:not([data-processed]) {
+  display: inline-block;
+  text-align: left;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem 1.4rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.chart-figure { margin: 2rem 0; }
+.chart-figure figcaption {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 5rem;
+  border-top: 1px solid var(--rule);
+  padding: 2.5rem 0 3rem;
+}
+footer .sources h2 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+footer .sources ol {
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+footer .sources li { margin-bottom: 0.5rem; overflow-wrap: break-word; word-break: break-all; }
+footer .sources .src-title { color: var(--ink); word-break: normal; }
+footer .sources .src-url { display: block; margin-top: 0.15rem; font-size: 0.82rem; color: var(--accent); word-break: break-all; }
+footer .sources a { word-break: break-all; }
+sup a { color: var(--accent); text-decoration: none; font-size: 0.75em; font-weight: 600; }
+sup a:hover { text-decoration: underline; }
+
+/* ===== TOC ===== */
+.toc {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.6rem 1.8rem;
+  margin: 3rem 0;
+}
+.toc h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.toc ol { list-style: none; counter-reset: toc; }
+.toc ol li {
+  counter-increment: toc;
+  padding: 0.28rem 0;
+  font-size: 0.95rem;
+}
+.toc ol li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent2);
+  margin-right: 0.7rem;
+}
+.toc ol li a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
+.toc ol li a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.toc .toc-part {
+  margin-top: 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .container { padding: 0 1.1rem; }
+  .cover { padding: 4rem 0 3rem; }
+  .cover .meta { gap: 1.2rem; }
+}
+
+@media print {
+  body { background: #fff; }
+  .cover, .part, h3.chapter { page-break-after: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<header class="cover">
+  <div class="container">
+    <div class="kicker">Book Outline · 书籍大纲</div>
+    <h1>被操纵的男人
+      <span class="en">The Manipulated Man</span>
+    </h1>
+    <p class="sub">埃斯特·维拉尔（Esther Vilar）1971 年德文原著《Der dressierte Mann》的完整中文大纲，逐章梳理核心观点与论据。</p>
+    <div class="meta">
+      <div><b>24</b>章节</div>
+      <div><b>3</b>大主题部</div>
+      <div><b>1971</b>初版年份</div>
+      <div><b>18</b>国际版本</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ============ OVERVIEW ============ -->
+<section>
+  <div class="part">
+    <div class="part-label">Overview · 概览</div>
+    <h2>书籍概览</h2>
+    <p class="part-desc">本书是一部以极端挑衅姿态写成的两性关系论战之作，作者以女性身份公开反驳女权运动的主流叙事。</p>
+  </div>
+
+  <p class="body">《被操纵的男人》由阿根廷出生的德裔女作家、医生埃斯特·维拉尔（Esther Vilar，1935—）撰写，1971 年以德文《Der dressierte Mann》出版，1972 年英译本问世，全球发行 18 个国际版本。作者在 1998 年版序言中自述：这是一部"怀着极大愤怒写成的、针对女权运动垄断舆论的小册子"。</p>
+
+  <p class="body">全书的核心命题是：<mark class="key">在两性关系中，真正被操纵、被剥削的一方是男性，而非女性</mark>。维拉尔认为，女性通过一整套从婴儿期就开始的"驯化"机制——赞美、自我贬抑、性奖赏、宗教罪感、孩子作为人质——把男性训练成心甘情愿的供养者与奴隶，同时让男性误以为自己才是"宇宙的主人"。全书以冷峻、夸张、反讽的笔调展开论证，出版后引发巨大争议，作者本人也因此遭到辱骂、抵制甚至死亡威胁。</p>
+
+  <div class="quote">"男人被女人训练和条件化，就像巴甫洛夫条件化他的狗一样，最终成为她们的奴隶。"——本书宣传语</div>
+
+  <p class="body">本书并非小说，而是一部论战性的社会评论著作。以下大纲按原书 24 个章节逐一整理其核心观点与论据，并按主题划分为三大部：<strong>两性本质论</strong>（第 1—8 章）、<strong>操纵机制</strong>（第 9—18 章）、<strong>社会镜像</strong>（第 19—24 章）。</p>
+</section>
+
+<!-- ============ FRAMEWORK DIAGRAM ============ -->
+<section>
+  <div class="part">
+    <div class="part-label">Framework · 框架</div>
+    <h2>全书论证框架</h2>
+    <p class="part-desc">维拉尔把两性关系描述为一个由女性主导、从摇篮到坟墓的"驯化—操纵"闭环系统。</p>
+  </div>
+
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    A["婴儿期驯化&lt;br/&gt;赞美机制 · 玩具分工"] --> B["自我贬抑&lt;br/&gt;女人假装不如男人"]
+    B --> C["性作为奖赏&lt;br/&gt;用身体交换供养"]
+    C --> D["宗教罪感&lt;br/&gt;教会充当'警察部队'"]
+    D --> E["孩子作为人质&lt;br/&gt;终身剥削的筹码"]
+    E --> F["自我条件反射&lt;br/&gt;广告业 · 流行歌曲"]
+    F --> G["终身奴役&lt;br/&gt;男人自认是主人"]
+    G --> A
+    H["女人的面具&lt;br/&gt;化妆 · 时尚 · 神秘化"] -.维持.-> G
+    I["社会镜像&lt;br/&gt;职场猎场 · 女权运动"] -.强化.-> G
+    </pre>
+    <figcaption>图 1：全书论证的"操纵闭环"结构</figcaption>
+  </figure>
+</section>
+
+<!-- ============ PART 1 ============ -->
+<section id="part1">
+  <div class="part">
+    <div class="part-label">Part One · 第一部分</div>
+    <h2>第一部 · 两性本质论</h2>
+    <p class="part-desc">维拉尔首先重新定义"男人"与"女人"的本质，颠覆"男性压迫女性"的常识叙事，为后续的操纵机制分析奠定基础。</p>
+  </div>
+
+  <!-- Ch 1 -->
+  <h3 class="chapter" id="ch1">
+    <span class="no">Chapter 01</span>作者序言
+    <span class="en">Author's Introduction（1998 年版）</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>本书是作者对女权运动"垄断舆论"的反击；25 年后回望，<strong>女性对男性的操纵不但没有减弱，反而更加巩固</strong>，而结束这种操纵对两性都有利。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>写作动机</b>：女权运动把女性描绘成男性受害者，作者认为这"既羞辱人又不现实"，改变女性命运需要更多诚实与幽默。</li>
+      <li><b>舆论结构</b>：女性寿命更长、占选民多数，政客不敢得罪她们；媒体靠面向女性的消费品广告生存，因此不敢批评女性。</li>
+      <li><b>男性的自欺</b>：职业越自动化、越受电脑控制、失业压力越大，男性越恐惧重新评估自己的处境，越需要维持"被奴役的是别人"的幻觉。</li>
+      <li><b>女权主义的悖论</b>：今天的男性比妻子更需要女权主义——女权主义者把男性描述成"自我中心、权力狂、无情"，恰好是男性愿意相信的自我形象，反而维护了现状。</li>
+      <li><b>男性八大劣势清单</b>：征兵、上战场、退休更晚、无法控制生育、终身供养女性、终身工作、平均更穷、离婚时失去孩子。</li>
+      <li><b>结论</b>：女性的权力地位只增不减；只有少数女性愿意反过来供养男性，而男性也拒绝被"包养"。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 2 -->
+  <h3 class="chapter" id="ch2">
+    <span class="no">Chapter 02</span>奴隶的幸福
+    <span class="en">The Slave's Happiness</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>通过"换轮胎"场景引入全书命题：<strong>男人是奴隶却自以为是主人；女人利用男人却从未被揭穿</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>开场场景</b>：女人车胎爆了，男人停下帮她换胎，弄脏衣服、耽误生意、事后超速赶路，却感到"幸福"；女人则用"典型的女性无助"道歉并轻松离开。</li>
+      <li><b>剥削方向</b>：女人让男人替她们工作、思考、承担责任——她们剥削男人。既然男人更强壮、更聪明、更有想象力，为何不是男人剥削女人？</li>
+      <li><b>核心反问</b>：力量、智慧、想象力或许不是权力的前提，而只是"奴隶的资格"？世界也许不是由专家统治，而是由"什么都不会的人"（女人）统治？</li>
+      <li><b>未解之谜</b>：女人如何让受害者（男人）不感到受骗与屈辱，反而相信自己是最不像"宇宙主人"的宇宙主人？</li>
+    </ul>
+  </div>
+
+  <!-- Ch 3 -->
+  <h3 class="chapter" id="ch3">
+    <span class="no">Chapter 03</span>什么是男人
+    <span class="en">What Is Man?</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>男人是"工作的人"，一生被训练成供养者；其整个生命是一连串条件反射，遵循"<strong>非自由中的快乐</strong>"原则。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>定义</b>：男人是工作的人，供养自己、妻子和妻子的孩子；女人是不工作（或偶尔工作）的人。女人把有用的男性特质叫"男性气质"，其余叫"女性气质"。</li>
+      <li><b>外貌即工装</b>：男人的西装、短发、功能手表全部为工作服务；女人的服装几乎没有口袋，因为她们不工作。</li>
+      <li><b>专业化牢笼</b>：男人擅长什么就被迫终身从事什么，永远不能说"我厌倦了"；换职业被视为不可靠，多次更换则成为社会弃儿。</li>
+      <li><b>齿轮人生</b>：无论书吏、医生、司机还是董事，男人都作为"巨大无情系统中的一个齿轮"被剥削到死。</li>
+      <li><b>为他人而自豪</b>：男人为供养他人而骄傲，桌上摆着妻儿照片；失去赚钱能力即被视为失败者，失去一切。</li>
+      <li><b>非自由中的快乐</b>：男人不断寻找能奴役他的人或物，因为只有作为奴隶才感到安全；终身自由比终身奴役更可怕。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 4 -->
+  <h3 class="chapter" id="ch4">
+    <span class="no">Chapter 04</span>什么是女人
+    <span class="en">What Is Woman?</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人是"不工作的人"，选择动物性存在而非精神性存在；她们<strong>有智力潜力却故意让它萎缩</strong>，因为生存并不需要。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>智力退化</b>：出生时两性智力潜力相同，但女人不运用心智，任其不可逆地萎缩；理论上，一个美丽但不如黑猩猩聪明的女人仍可被社会接受。</li>
+      <li><b>"妓女"决策</b>：最迟 12 岁，大多数女人已决定"成为妓女"——选择一个男人并让他做所有工作，用阴道使用权交换供养；一旦决定，便停止发展心智。</li>
+      <li><b>男人的误判</b>：男人最大的错误是假设女人是他的平等者；他以自己的标准衡量女人，误以为家务在"压制"她。</li>
+      <li><b>解放的徒劳</b>：男人发明洗碗机、吸尘器、预煮食物想解放女人，女人却用来烤蛋糕、熨内衣、贴花纸，对政治、科学、宇宙征服毫无兴趣。</li>
+      <li><b>不觉得被压迫</b>：瑞士某州女性多数反对女性投票权；女人对男人的依赖只是物质性的，如同游客依赖航空公司、汽车依赖汽油。</li>
+      <li><b>选择权的不对称</b>：女人可以选择男人的生活或"寄生奢侈品"的生活，而男人没有这种选择。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 5 -->
+  <h3 class="chapter" id="ch5">
+    <span class="no">Chapter 05</span>女人的视界
+    <span class="en">The Horizon of a Woman</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人的世界里只有女人：<strong>男人的评价无关紧要，其他女人的评价才是成败的标尺</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>评价体系</b>：男人回头看她，如同股东看到股票上涨；另一个女人回头看她，才是真正的胜利——女人以其他女人为镜。</li>
+      <li><b>打扮的目的</b>：女人打扮主要为了其他女人，对男人只需做到"吸引供养者"的程度；男人只是"提供者"。</li>
+      <li><b>公司式无感情</b>：女人像公司一样无感情地绑定供养她的男人；只有在他要离开时（生计受威胁）才产生"感情"，且可理性处理、随时换约。</li>
+      <li><b>不嫉妒</b>：男人离开她只是去了另一个女人那里，并非获得自由；女人的"嫉妒"如同小企业主失去最好的工人。</li>
+      <li><b>对男性外貌免疫</b>：广告用美女而非帅哥吸引女性消费者；电影中丑陋的男星（贝尔蒙多、马修、霍夫曼）照样受欢迎。</li>
+      <li><b>女人之间的竞争</b>：女人互相贬损是竞争策略，如同商人贬低对手；若无经济压力，大多数女人宁愿与女人共度一生。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 6 -->
+  <h3 class="chapter" id="ch6">
+    <span class="no">Chapter 06</span>美丽的性别
+    <span class="en">The Fair Sex</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>"美丽的性别"是男人为自身奴役寻找的正当化借口；女人通过<strong>模仿儿童</strong>唤起男人的保护本能。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>正当化机制</b>：男人需要女人作为臣服对象，同时要保持自尊，于是赋予女人"直觉"和"美丽"等品质以证明臣服合理。</li>
+      <li><b>婴儿模仿</b>：女人模仿儿童——婴儿肥、无助、需要保护，唤起物种天然的保护本能；化妆品维持"婴儿脸"。</li>
+      <li><b>权力的延续</b>：超过 25 岁婴儿脸难以维持，但女人靠孩子继续假装无助，且"年轻女人不够分配"使男人只能留下现有妻子。</li>
+      <li><b>男人其实更美</b>：男人的身体因工作保持健美，女人因惰性迅速衰败；但男人不认为自己美，也没人赞美男性身体。</li>
+      <li><b>机器化看待</b>：女人把男人视为"生产物质的机器"，谁会把机器当作美的对象？</li>
+    </ul>
+  </div>
+
+  <!-- Ch 7 -->
+  <h3 class="chapter" id="ch7">
+    <span class="no">Chapter 07</span>男人的宇宙
+    <span class="en">It's a Man's Universe</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>男人是思考、好奇、有创造力的存在，却把一切奉献给不配的女人，<strong>主动选择成为奴隶</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>男性特质</b>：求知欲、思考力、创造力、敏感性；女人的好奇只针对"个人有用性"（读政治文章是为了吸引政治系学生）。</li>
+      <li><b>发明清单</b>：几乎所有发明与发现都出自男人——电、航空、妇科、控制论、数学、量子力学、婴儿营养、巴氏杀菌、美食；女人连胎儿如何形成都不关心。</li>
+      <li><b>西西弗斯式命运</b>：社会把男人视为"生来学习、工作、生儿育女"的存在；只为自己而活的自由男人被社会排斥。</li>
+      <li><b>为成就道歉</b>：男人发明新事物必须包装成"对全人类（即女人）有用"；他把智力浪费在压力锅、地毯、洗涤剂、口红上，而非探索宇宙。</li>
+      <li><b>权力转移</b>：女人已拥有对男人的完全心理控制，很快将拥有物质控制——美国一半私人资本掌握在女人手中，而职业女性比例却在下降。</li>
+      <li><b>终极讽刺</b>：以男人的智力，只需几天就能造出替代女人的机器人——因为女人身上没有任何不可替代的东西，但男人害怕面对真相。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 8 -->
+  <h3 class="chapter" id="ch8">
+    <span class="no">Chapter 08</span>女人——因愚蠢而神圣
+    <span class="en">Woman – Divine by Right of Stupidity</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>只有被压迫者才需要自由；聪明的男人因抽象思维而恐惧自由，转而寻找新的神——女人；<strong>女人的愚蠢与伪装使她神圣而不可揭穿</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>自由恐惧症</b>：愚蠢的人满足于自由、不惧死亡、不需要生命意义；聪明的人因知道每个行为都有后果而恐惧自由，渴望回到童年的规则。</li>
+      <li><b>寻找新神</b>：男人知道完美的神不存在，于是自我制造规则（马克思主义、兄弟之爱、种族主义、民族主义）；但大多数男人选择臣服于一个排他的神——女人，并称之为"爱"。</li>
+      <li><b>女人作为神的资格</b>：女人永远在场、不断提出要求（男人永不觉得被抛弃）、像母亲、可惩罚（收回归属感）也可奖赏（给予性快感）。</li>
+      <li><b>神圣的两个条件</b>：伪装（显得神秘）+ 愚蠢（不可预测、不可控制）。智慧可被测量、预测、控制，而愚蠢不能。</li>
+      <li><b>不可揭穿</b>：女人的愚蠢像教皇或独裁者的屏障，使她无法被揭穿，权力得以无限增长。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section id="part2">
+  <div class="part">
+    <div class="part-label">Part Two · 第二部分</div>
+    <h2>第二部 · 操纵机制</h2>
+    <p class="part-desc">本部分详细拆解女性操纵男性的具体手段：从婴儿期的驯化训练，到赞美、自我贬抑、性奖赏、宗教罪感、孩子人质与自我条件反射。</p>
+  </div>
+
+  <!-- Ch 9 -->
+  <h3 class="chapter" id="ch9">
+    <span class="no">Chapter 09</span>驯服
+    <span class="en">Breaking Them In</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人从婴儿期开始训练男人，通过<strong>"赞美"这一条件反射机制</strong>，使男人把自我价值等同于女人的评价。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>训练时机</b>：男婴处于母亲完全管辖之下，最容易训练；最擅长训练男人的女人自然繁衍后代。</li>
+      <li><b>依赖养成</b>：男人从小习惯女性在场，把"有女人"视为正常；女人进一步把男人直接训练为"为她工作"。</li>
+      <li><b>赞美的三重功效</b>：使被赞美者依赖（赞美来自更高者）、上瘾（无赞美即不知自身价值）、提高生产力（赞美越来越高成就）。</li>
+      <li><b>恶性循环</b>：男孩因用便盆、喝完奶被赞美，从此重复受赞行为，成为"赞美瘾君子"。</li>
+      <li><b>玩具分工</b>：女孩得到娃娃与茶具（学习当母亲），男孩得到机械装置（学习供养）；女孩被训练成剥削者，男孩被训练成被剥削者。</li>
+      <li><b>私人赞美者</b>：男人之间处于敌对竞争，需要一个私人的、专属的"赞美者"——女人；连成功的艺术家（如贝克特）也因害怕失去赞美而固守成功模式。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 10 -->
+  <h3 class="chapter" id="ch10">
+    <span class="no">Chapter 10</span>以自我贬抑进行操纵
+    <span class="en">Manipulation by Means of Self-Abasement</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人通过<strong>自我贬抑</strong>（假装不如男人）建立男人的自信以便更好地操纵他；"男性气质=工作、女性气质=不做事"是女人发明的神话。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>假装愚笨</b>：女人故意装得比实际更笨，给男孩"先发优势"，使其获得第一份自信。</li>
+      <li><b>富人的特权</b>：女人的价值不由智力衡量，如同富人——可以随意愚蠢，仍有人供养。</li>
+      <li><b>核心公式</b>："男性=工作，女性=不做事"；男人乐于相信并引以为荣，从未想到大象比人更强壮。</li>
+      <li><b>家务真相</b>：家务其实很容易（精神病院由最迟钝的病人做），女人却把它说得辛苦无比，让男人觉得自己幸运。</li>
+      <li><b>男人的需要</b>：男人必须相信女人做不了他的工作，否则生活的单调会逼疯他；女人适时制造这种印象以维持距离。</li>
+      <li><b>荣誉感系统</b>：男人的荣誉感是女人发明的规则，女人自己豁免于该系统；"夏娃由亚当肋骨所造"的故事也是女人发明的自我贬抑。</li>
+      <li><b>叹息的威力</b>：女人只需叹息"作为女人我不行"，便获得终身司机、侍从、政治顾问；她"看不懂政治"，男人便替她研究并奉上现成意见。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 11 -->
+  <h3 class="chapter" id="ch11">
+    <span class="no">Chapter 11</span>一部词典
+    <span class="en">A Dictionary</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人的语言是密码，男人按字面理解；本章提供一部"<strong>解码词典</strong>"，揭示女人话语的真实含义。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结（词典示例）</h4>
+    <ul>
+      <li>"你必须能保护我" = "你必须让我免于一切不适"。</li>
+      <li>"我需要一个男人让我有安全感" = "他必须把金钱烦恼留给自己"。</li>
+      <li>"我必须能仰望一个男人" = "他必须比我更聪明、负责、勇敢、勤奋、强壮，否则要他何用"。</li>
+      <li>"我当然会为丈夫放弃事业" = "一旦他赚够钱，我再也不工作"。</li>
+      <li>"我一生只想让他幸福" = "我要竭尽全力不让他知道我剥削他"。</li>
+      <li>"我不相信女权解放" = "我没那么傻，宁可让男人为我工作"。</li>
+      <li>"我太不擅长做那种事" = "那是他该做的活"。</li>
+      <li>"我爱他" = "他是一匹出色的役马"。</li>
+      <li><b>解码原则</b>：女人只在男人在场时说这些套话；女人之间谈论男人就像谈论家用电器，或直接以"职业=收入=养老金"为标准挑选男人。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 12 -->
+  <h3 class="chapter" id="ch12">
+    <span class="no">Chapter 12</span>女人没有感情
+    <span class="en">Women Have No Feelings</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人通过"好礼貌"与"压抑男人情感"操纵男人；<strong>女人本身冷酷无情，眼泪是训练出来的工具</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>好礼貌规则</b>：男人必须永远像对待女王一样对待女人；母亲给儿子的约会建议（付车费、开门、护行）是女人胆大妄为的例证。</li>
+      <li><b>保护者角色</b>：最讽刺的是"保护者"角色——男人必须用生命保护女人，包括上战场；而女人不感性、更坚韧、寿命更长，本可更好地承受战争。</li>
+      <li><b>情感压抑</b>：男孩从小被教"男孩不哭"，女人则被允许哭并利用眼泪；男人以"泪量"判断女人的情感深度，实为误读。</li>
+      <li><b>冷酷的理性</b>：女人冷酷是因为感情对她们不利——感情可能让她们选择无法操纵的男人；她必须假装敏感以掩盖算计本性。</li>
+      <li><b>眼泪经济学</b>：女人为取消度假计划而嚎啕大哭，男人以为其情感同样强烈，实则她头脑冷静、算计清晰。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 13 -->
+  <h3 class="chapter" id="ch13">
+    <span class="no">Chapter 13</span>性作为奖赏
+    <span class="en">Sex as a Reward</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>一切操纵基于"胡萝卜加大棒"；对男人而言，<strong>性是最有力的奖赏</strong>，女人用性交换供养。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>无法自给的唯一需要</b>：男人能自食其力，无法用食物收买；唯一无法自给的是与女人身体接触的需要，这使他自愿奴役。</li>
+      <li><b>贞洁即资本</b>：女人压抑性欲以抬高"市场价值"；女孩被教导在青春期也压抑欲望，为日后资本。</li>
+      <li><b>诱饵打扮</b>：男人从不被鼓励唤起性欲，女人从 12 岁起就打扮成"诱饵"，让男人以为幸福就是赚钱买下橱窗里的商品。</li>
+      <li><b>信贷系统</b>：两性关系是信贷系统——女人暂时工作作为对男人未来收入的"贷款"，利率极高。</li>
+      <li><b>妓女的悖论</b>：妓女是少数诚实承认用身体赚钱的女人；女人鄙视妓女只因她"卖得太便宜"，而崇拜嫁给富豪的女人。</li>
+      <li><b>性欲与服从</b>：男人性欲越强越服从女人；广告中"活力四射的年轻男人"不过是性依赖者。</li>
+      <li><b>驳弗洛伊德</b>："阴茎嫉妒"理论荒谬——女人不嫉妒阴茎，反而男人该嫉妒女人的权力；弗洛伊德只是女人自我贬抑训练的受害者。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 14 -->
+  <h3 class="chapter" id="ch14">
+    <span class="no">Chapter 14</span>女性的性欲
+    <span class="en">The Female Libido</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女性性欲的真实情况无法确知（女人按利益说谎）；<strong>避孕药剥夺了男人最后的胜利</strong>，使女人完全掌控生育。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>信息不可靠</b>：女人对科学数据无尊重，只说对自己有利的话；关于女性性欲的信息自相矛盾，连马斯特斯与约翰逊也测不到普通女人。</li>
+      <li><b>动物性存在</b>：女人喜欢吃、喝、睡、性（如果无需努力）；性交对女人是一种"服务"，男人是更好的情人。</li>
+      <li><b>避孕药革命</b>：可靠口服避孕药（男人发明）剥夺了男人性奴役中最后的胜利——女人现在可随意选择孩子与父亲，或尽情享受无后果的性。</li>
+      <li><b>男人的统计陷阱</b>：男人不屑于撒谎，提供关于自己性能力的精确统计；女人据此评估并利用，甚至偏好性能力弱者（可以其弱点要挟）。</li>
+      <li><b>效率原则</b>：男人以"三次很好、两次好、一次满意"衡量自己，失败即全盘失败；女人用三种方式利用其性焦虑：假装不知、让他感恩、威胁揭露。</li>
+      <li><b>女人的真正关切</b>：女人只关心男人能否生育；许多女人希望男人在生完两三个孩子后性欲消退。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 15 -->
+  <h3 class="chapter" id="ch15">
+    <span class="no">Chapter 15</span>虚张声势的操纵
+    <span class="en">Manipulation Through Bluff</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人利用教会等宗教机构作为"警察部队"操纵男人；<strong>宗教的罪感系统使男人永远处于可被操纵的恐惧状态</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>教会的工具化</b>：教会、教派被女人冷血地用来帮助操纵孩子，其神职人员如同"军事警察部队"。</li>
+      <li><b>宗教即操纵</b>：宗教由规则、禁忌与罪罚构成；罪感在童年被植入，成年后无法消除。</li>
+      <li><b>性罪的核心地位</b>：教会选择"性"作为禁忌，因为它是男人最大最纯粹的快乐；目的是让男人保持罪感（恐惧），从而可被操纵。</li>
+      <li><b>女人的豁免</b>：女人控制性欲，不犯"性罪"，因此没有罪感账户；她们像耶稣、甘地一样被男人视为永远达不到的理想。</li>
+      <li><b>牧师必须是男人</b>：女人确保神职人员是男性——女性形象不能受损，且男人更愿听男人的话；教会靠女人支持，女人却不需要教会。</li>
+      <li><b>现代神学失效</b>：现代神学已放弃"胡萝卜加大棒"，对条件反射无用；女人需要天堂地狱的古老故事来操纵。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 16 -->
+  <h3 class="chapter" id="ch16">
+    <span class="no">Chapter 16</span>商业化的祈祷
+    <span class="en">Commercialized Prayers</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人教男人爱真理，以便自己可以撒谎；<strong>男人的祈祷（包括流行歌曲）是向"女神"（女人）的祈求</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>真理的分工</b>：分工社会必须依靠男人互相信任，男人必须相信真理；女人不参与工作，可以毫无愧疚地撒谎（"女性狡黠"）。</li>
+      <li><b>撒谎的禁忌化</b>：女人把撒谎与厌恶联系起来（宗教惩罚或"个人魔法"），母亲对孩子撒谎却教孩子不撒谎。</li>
+      <li><b>男人的唯一谎言</b>：男人唯一会撒谎的情形是与别的女人上床（怕妻子报复）；撞车杀人反而坦白。女人相反：隐瞒一切，却宣扬其他男人的兴趣，让丈夫知道有人愿意照顾她。</li>
+      <li><b>祈祷的世俗化</b>：男人的"非自由欲望"导致宗教狂热与祈祷；流行歌曲是童年祈祷的变体，歌词（"带我飞向月球"、"这些靴子是用来走路的"）满足男人对残酷女神的渴望。</li>
+      <li><b>商业化的自伤</b>：这些"黑暗渴望"被商业化，由男人自己买单。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 17 -->
+  <h3 class="chapter" id="ch17">
+    <span class="no">Chapter 17</span>自我条件反射
+    <span class="en">Self-Conditioning</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>男人不仅被女人训练，还<strong>自我训练</strong>——广告业是男人自我操纵的最佳例证，他为了供养女人而向女人献媚。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>自我训练</b>：理想的训练者让动物自我训练；男人比女训练者更聪明，会继续自我训练，只要不忘目的与奖惩。</li>
+      <li><b>广告业的逻辑</b>：只有女人（剥削者）有时间有钱消费，男人必须讨好女人作为顾客；市场研究寻找"潜意识女性刺激"。</li>
+      <li><b>自设陷阱</b>：男人为让妻子有购买力而培养其他女人消费，陷入越转越快的恶性循环；外面为钱厮杀，家里妻子越来越蠢，房子堆满垃圾。</li>
+      <li><b>两性差距扩大</b>：女人越来越蠢（舒适使大脑迟钝），男人越来越聪明（必须创造舒适），相互理解几乎不可能。</li>
+      <li><b>广告塑造女神</b>：广告把女人塑造成机智、聪明、有创造力的女神形象，男人不敢承认女人其实无想象力、愚蠢、迟钝。</li>
+      <li><b>性产业的自证</b>：《花花公子》等杂志是男人自我条件反射的证明——男人制造色情让其他男人付费，还发明"胸脯崇拜"以维持勃起。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 18 -->
+  <h3 class="chapter" id="ch18">
+    <span class="no">Chapter 18</span>以孩子为人质
+    <span class="en">Children as Hostages</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>孩子是男人交给女人的"人质"，是男人奴役的正当化借口，也是<strong>女人终身剥削的筹码</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>双方利用</b>：男人需要孩子作为臣服的借口（尤其性能力衰退后）；女人需要孩子作为懒惰、愚蠢、不负责任的借口。</li>
+      <li><b>一神论的男人</b>：男人只能有一个女神（一夫一妻），否则身份动摇；女人不需要神，只需一个让特定男人终身工作的借口——生他的孩子。</li>
+      <li><b>人质逻辑</b>：男人生孩子是给女人"人质"，希望她永远剥削他，这是他唯一获得稳定感的方式。</li>
+      <li><b>女人不爱孩子</b>：女人只爱自己的孩子，收养只在自己不能生育时；宁愿收养流浪猫狗也不收养孤儿，却假装爱孩子。</li>
+      <li><b>畸形儿与殉道者</b>：女人不顾畸形儿风险继续生育；生畸形儿反而被视为"殉道者"受尊敬，还会再生一个"正常"孩子证明自己健康。</li>
+      <li><b>分娩被夸大</b>：无痛分娩早已存在，生孩子如同看牙医；女人把分娩的痛苦说得骇人听闻以制造男人的愧疚。</li>
+      <li><b>老虎机逻辑</b>：女人像玩老虎机一样生孩子，直到增加工作量为止；理想孩子数取决于家务自动化程度（美国 3 个、西欧 2 个）。</li>
+      <li><b>独生子女的劣势</b>：独生子女使母亲必须陪玩（女人最恨陪玩）；多个孩子可互相陪玩，母亲用"情感勒索"（偏爱其中一个）训练其余孩子。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section id="part3">
+  <div class="part">
+    <div class="part-label">Part Three · 第三部分</div>
+    <h2>第三部 · 社会镜像</h2>
+    <p class="part-desc">本部分把操纵机制投射到社会层面：女人的"恶习"、女性气质的面具、职场猎场、"解放女性"与美国男人，最后以"什么是爱"作结。</p>
+  </div>
+
+  <!-- Ch 19 -->
+  <h3 class="chapter" id="ch19">
+    <span class="no">Chapter 19</span>女人的恶习
+    <span class="en">Women's Vices</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人把"快乐"称为"家务"；<strong>女人的愚蠢是选择性的、被培养的，并正在感染公共生活</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>快乐即家务</b>：女人不工作却有不同快乐——烤蛋糕、熨衣服、做衣服、擦窗、卷发、涂脚趾甲；她把这些称为"家务"以掩盖其享乐本质。</li>
+      <li><b>男性无法理解</b>：男人无法想象这些是女人的快乐；心理学家也理解不了——"女性心理深不可测"只是因为缺乏智力。</li>
+      <li><b>记忆型智力</b>：女学生擅长死记硬背的科目（语言、规则数学），不擅长物理化学；"女性智力"是一种被培养的愚蠢。</li>
+      <li><b>"直觉"的真相</b>：女性"直觉"只是统计概率的委婉说法——因为愚蠢，预测偶尔正确；其预测多为负面或模糊的泛泛之谈。</li>
+      <li><b>保持心智空白</b>：女孩 5 岁就被说服要结婚成家；聪明对寄生生活无用，女人必须"心智自由"以迎合未来丈夫（如杰奎琳·布维尔先亲民主后亲法西斯）。</li>
+      <li><b>愚蠢的扩散</b>：女人的愚蠢正在感染公共生活——大众媒体、女性节目、八卦、时尚、星座、食谱；男人读严肃刊物，女人读时尚八卦，唯一共同兴趣是"女人"。</li>
+      <li><b>女性杂志的指南性</b>：女性杂志教女人如何"抓住"和"留住"男人，如同购买汽车或羊绒衫的指南；政治报道必须围绕女人才能吸引女性读者。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 20 -->
+  <h3 class="chapter" id="ch20">
+    <span class="no">Chapter 20</span>女性气质的面具
+    <span class="en">The Mask of Femininity</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人通过化妆品、发型、服装制造"女性气质"面具，使自己与男人不同、神秘，从而<strong>维持男人的奴役</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>差异是人为的</b>：素颜秃头的裸体男女几乎无差别；男人通过发展智力成为男人，女人通过逐渐愚蠢化和改造外表成为女人。</li>
+      <li><b>面具的双重成分</b>：强调第二性征（使男人渴望）+ 面具疏离（使男人觉得神秘），女人由此制造"未知的对立性别"。</li>
+      <li><b>每日变身</b>：女人每天变换外貌，使男人永远困惑，争取时间达到目的，同时掩盖"面具下腐烂的心灵"。</li>
+      <li><b>自我崇拜的宗教</b>：女人以"女性陌生人的眼光"自我审视、自我崇拜，满足其最低限度的宗教需要，从而豁免于意识形态与宗教系统。</li>
+      <li><b>规则的复杂化</b>：化妆、发型、服装的规则越来越复杂（眼影三色、假睫毛逐根粘贴、泳池防水妆、葬礼淡妆），女人以宗教般的虔诚遵守。</li>
+      <li><b>男人的内疚</b>：男人因自己"原始需要"感到内疚，相信自己在压制女人；实际上整个"女性文化"是女人自娱自乐的产物。</li>
+      <li><b>戴面具的男人</b>：少数戴面具的男人（诗人、画家、摇滚乐手、演员、嬉皮士）只是"宫廷小丑"，仍需女人消费其收入。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 21 -->
+  <h3 class="chapter" id="ch21">
+    <span class="no">Chapter 21</span>作为猎场的商业世界
+    <span class="en">The Business World as a Hunting Ground</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>女人工作或上学只是为了"猎取"丈夫；<strong>办公室、工厂、大学对她们只是巨大的婚姻市场</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>唯一重要的选择</b>：女人一生唯一重要的行为是选择正确的伴侣，其他选择可以犯错；她到男人工作或学习的地方观察、挑选。</li>
+      <li><b>猎场分层</b>：猎场选择取决于父亲收入——富家女上大学，穷家女进工厂、商店、医院，但目的相同。</li>
+      <li><b>"牺牲"制造义务</b>：女人"为爱放弃事业"的牺牲创造义务，男人必须加倍补偿。</li>
+      <li><b>工作意义的性别差异</b>：男人工作关乎生死，25 岁不成器即无望；女人工作只是消遣、调情与"装样子"，找到"真命天子"就优雅退场。</li>
+      <li><b>大学的婚姻市场</b>：女学生设计春季衣橱、与男生调情，男学生赌上整个未来；女人嫁给大学讲师就达到他的水平而不费力。</li>
+      <li><b>成功男人的愚蠢妻子</b>：成功的男人通常娶美丽愚蠢的妻子（模特）；"美丽"使她们潜在富有，而"美丽"本身源于从未需要发展智力。</li>
+      <li><b>学位的市场价值</b>：10—20% 的女学生确实获得学位，但通常是不太吸引人、没抓到供养者的；学位自动提高其"市场价值"。</li>
+      <li><b>殊途同归</b>：女医生、女社会学家、女律师最终也"为男人牺牲事业"，几年后变得和邻居一样。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 22 -->
+  <h3 class="chapter" id="ch22">
+    <span class="no">Chapter 22</span>"解放"的女性
+    <span class="en">The "Emancipated" Female</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>25 岁后仍在工作的女人有五种类型；<strong>"解放女性"并不解放，反而更彻底地剥削男人</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>五种类型</b>：嫁了失败者、不能生育、丑陋、解放、真正对职业感兴趣（最后一种极其罕见）。</li>
+      <li><b>丑陋女人</b>：像男人一样工作（没人替她做），但不会用钱供养漂亮年轻男人；她常被误认为"解放"，其成功被郊区剥削者利用（"我们本可以做到，但为你们放弃了"）。</li>
+      <li><b>解放女性的定义</b>：必须曾经美丽（有奴隶可用）；她工作不为钱，而是为了娱乐和观众，一有困难就有男人来救。</li>
+      <li><b>混淆因果</b>：解放女性以为工作=聪明，实则男人工作只因不得不；她抱怨没有和男人一样的机会，却从不加入残酷竞争。</li>
+      <li><b>丈夫的不幸</b>：解放女性的丈夫通常极不幸福——她升得比他快、他嫉妒、他感到多余，连"奴隶唯一的幸福"也被剥夺。</li>
+      <li><b>既要又要</b>：她既要有"刺激的脑力工作"，又要有孩子（送托儿所）和丈夫做家务；她从不帮丈夫赚钱、开门、买保险。</li>
+      <li><b>运动的表演性</b>：女权"运动"只是定期表演（烧胸罩、穿透视衬衫），从未消除愚蠢、谎言、缺乏感情与喋喋不休。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 23 -->
+  <h3 class="chapter" id="ch23">
+    <span class="no">Chapter 23</span>美国男人——地球上被操纵最成功的男性
+    <span class="en">American Man – the Most Successfully Manipulated Male on Earth</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>美国男人是地球上被操纵最成功的男性；美国女性是全世界女性的榜样，而<strong>女权运动在错误的前提上失败</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>全球示范效应</b>：美国的经济霸权使其社会行为模式通过大众媒体影响全世界。</li>
+      <li><b>最惨的男人</b>：没有哪个国家的男人比美国男人更惨（相对于其女性伴侣）；高生活水平+永久失业威胁使男人生活悲惨，"成功"与"失败"界限分明。</li>
+      <li><b>薪水即价值</b>：美国男人以薪水衡量自我价值，男性气质直接与金钱关联；他感谢妻子让他去工作（工作被视为男性特权）。</li>
+      <li><b>最昂贵的妻子</b>：美国女人是最高的"付费妻子"、最大的化妆品消费者、生活最舒适；离婚率、出生率、赡养费均最高，男人平均寿命比妻子短 7 年。</li>
+      <li><b>性冷淡的生意</b>：美国女人把性冷淡宣传为"疾病"（妓女愿意放弃高潮，妻子不愿意），并以此获取治疗资源。</li>
+      <li><b>女权运动的起源</b>：女权运动始于美国，正因为美国女人最好过、社会差距巨大、放弃权力更痛苦；它由"不符合男性审美标准的少数女人"发起。</li>
+      <li><b>攻击错误的敌人</b>：女权运动攻击唯一的盟友（男人），奉承真正的罪人（女人）；波伏娃的《第二性》本可成为第一本关于女人的书，却成了男人观点的汇编。</li>
+      <li><b>要求全被满足</b>：女权运动的工作权、兵役权、赡养费权、姓氏权等要求几乎全部立即实现，但"被压迫的大军"从未出现——因为女人可以选择不做苦工。</li>
+      <li><b>结论</b>：女权运动失败了——"被压迫"的故事是虚构的；"解放"意味着放弃特权，而女权运动恰恰保证了这永远不会发生。</li>
+    </ul>
+  </div>
+
+  <!-- Ch 24 -->
+  <h3 class="chapter" id="ch24">
+    <span class="no">Chapter 24</span>什么是爱
+    <span class="en">What Is Love?</span>
+  </h3>
+  <div class="thesis">
+    <span class="label">核心观点</span>
+    <p>男人为生存而战并称之为"爱"（奴役）；女人为生存而战并称之为"爱"（权力）。<strong>只有女人能打破循环，但她不会</strong>。</p>
+  </div>
+  <div class="args">
+    <h4>论据总结</h4>
+    <ul>
+      <li><b>同词异义</b>：男人被操纵到离不开女人，为她的要求做任何事，称之为爱；女人像蜂王不能独自生存，也称之为爱。对女人，爱=权力；对男人，爱=奴役。</li>
+      <li><b>爱的双重标准</b>：女人"为爱"做只对自己有利的事（放弃事业）；男人"为爱"做只伤害自己的事（为两个人工作）。</li>
+      <li><b>生存斗争</b>：对两性而言，爱都是生存斗争——但一方靠胜利生存，一方靠失败生存。</li>
+      <li><b>男人的自欺</b>：男人用"爱"掩盖懦弱的自欺，相信奴役有更高目的；他完全满足于奴隶角色。</li>
+      <li><b>恶性循环</b>：男人越讨好女人，女人越苛求；他越渴望她，她越觉得他不可取；他提供越多舒适，她越懒惰愚蠢——男人因此越发孤独。</li>
+      <li><b>无解的结局</b>：只有女人能打破操纵的恶性循环，但她不会（没有理由，且她冷酷无情）；世界将更深地陷入"女性气质"的庸俗、野蛮与愚蠢泥沼，而男人这个"美妙的梦想家"永远不会醒来。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ SUMMARY TABLE ============ -->
+<section id="summary">
+  <div class="part">
+    <div class="part-label">Summary · 总表</div>
+    <h2>全书章节大纲总表</h2>
+    <p class="part-desc">以下总表以一句话概括每个章节的核心论点，便于快速检索与回顾。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:8%">章</th>
+          <th style="width:26%">章节</th>
+          <th style="width:66%">一句话核心论点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="no">01</span></td><td>作者序言</td><td>本书是反击女权"垄断舆论"之作；25 年后女性对男性的操纵反而更巩固。</td></tr>
+        <tr><td><span class="no">02</span></td><td>奴隶的幸福</td><td>男人是奴隶却自认主人，女人利用男人却从未被揭穿。</td></tr>
+        <tr><td><span class="no">03</span></td><td>什么是男人</td><td>男人是"工作的人"，一生被训练成供养者，遵循"非自由中的快乐"。</td></tr>
+        <tr><td><span class="no">04</span></td><td>什么是女人</td><td>女人是"不工作的人"，有智力潜力却故意让它萎缩。</td></tr>
+        <tr><td><span class="no">05</span></td><td>女人的视界</td><td>女人的世界里只有女人，其他女人的评价才是成败标尺。</td></tr>
+        <tr><td><span class="no">06</span></td><td>美丽的性别</td><td>"美丽"是男人为奴役找的借口；女人靠模仿儿童唤起保护本能。</td></tr>
+        <tr><td><span class="no">07</span></td><td>男人的宇宙</td><td>男人是思考与创造的存在，却把一切奉献给不配的女人。</td></tr>
+        <tr><td><span class="no">08</span></td><td>女人——因愚蠢而神圣</td><td>女人的愚蠢与伪装使她神圣而不可揭穿。</td></tr>
+        <tr><td><span class="no">09</span></td><td>驯服</td><td>女人从婴儿期用"赞美"条件反射把男人训练成供养者。</td></tr>
+        <tr><td><span class="no">10</span></td><td>以自我贬抑进行操纵</td><td>女人假装不如男人以建立其自信；"男性=工作"是女人发明的神话。</td></tr>
+        <tr><td><span class="no">11</span></td><td>一部词典</td><td>女人的话语是密码，本章提供解码词典。</td></tr>
+        <tr><td><span class="no">12</span></td><td>女人没有感情</td><td>女人冷酷无情，眼泪是训练出来的工具。</td></tr>
+        <tr><td><span class="no">13</span></td><td>性作为奖赏</td><td>性是最有力的奖赏，女人用性交换供养。</td></tr>
+        <tr><td><span class="no">14</span></td><td>女性的性欲</td><td>女性性欲无法确知；避孕药剥夺了男人最后的胜利。</td></tr>
+        <tr><td><span class="no">15</span></td><td>虚张声势的操纵</td><td>女人利用教会作为"警察部队"，宗教罪感使男人永远可被操纵。</td></tr>
+        <tr><td><span class="no">16</span></td><td>商业化的祈祷</td><td>女人教男人爱真理以便自己撒谎；流行歌曲是向女神的祈祷。</td></tr>
+        <tr><td><span class="no">17</span></td><td>自我条件反射</td><td>男人自我训练；广告业是自我操纵的最佳例证。</td></tr>
+        <tr><td><span class="no">18</span></td><td>以孩子为人质</td><td>孩子是男人交给女人的"人质"，是终身剥削的筹码。</td></tr>
+        <tr><td><span class="no">19</span></td><td>女人的恶习</td><td>女人把"快乐"称为"家务"，其愚蠢正在感染公共生活。</td></tr>
+        <tr><td><span class="no">20</span></td><td>女性气质的面具</td><td>女人用化妆与时尚制造面具，使自己神秘以维持奴役。</td></tr>
+        <tr><td><span class="no">21</span></td><td>作为猎场的商业世界</td><td>女人工作或上学只为"猎取"丈夫，职场只是婚姻市场。</td></tr>
+        <tr><td><span class="no">22</span></td><td>"解放"的女性</td><td>"解放女性"并不解放，反而更彻底地剥削男人。</td></tr>
+        <tr><td><span class="no">23</span></td><td>美国男人</td><td>美国男人是被操纵最成功的男性；女权运动在错误前提上失败。</td></tr>
+        <tr><td><span class="no">24</span></td><td>什么是爱</td><td>男人称奴役为爱，女人称权力为爱；只有女人能破局，但她不会。</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ READING GUIDE ============ -->
+<section id="guide">
+  <div class="part">
+    <div class="part-label">Reading Guide · 阅读提示</div>
+    <h2>理解本书的三条线索</h2>
+  </div>
+  <p class="body">其一，<mark class="key">立场先行</mark>：本书是论战性作品，作者刻意使用夸张、反讽与绝对化表述，其"女人愚蠢、男人被奴役"的论断应作为修辞策略而非科学结论阅读。</p>
+  <p class="body">其二，<mark class="key">结构闭环</mark>：全书从"两性本质"（第一部）到"操纵机制"（第二部）再到"社会镜像"（第三部），层层递进，最终回到"爱"的悖论，构成完整的论证闭环。</p>
+  <p class="body">其三，<mark class="key">时代语境</mark>：本书写于 1971 年第二波女权运动高潮期，是对当时主流叙事的直接反拨；1998 年序言又补充了作者对 25 年后现状的评估。阅读时宜结合其时代背景理解其挑衅姿态。</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="sources">
+      <h2>来源与说明</h2>
+      <ol>
+        <li id="cite-1">
+          <span class="src-title">Esther Vilar, 《The Manipulated Man》（被操纵的男人），Bantam Books 1974 年版（含 1998 年作者序言）。</span>
+          <span class="src-url">用户上传的 PDF 文档</span>
+        </li>
+        <li id="cite-2">
+          <span class="src-title">本书德文原著为 Esther Vilar, 《Der dressierte Mann》，1971 年出版。</span>
+          <span class="src-url">用户上传的 PDF 文档</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function initMermaid() {
+    if (!window.mermaid) return;
+    window.mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'loose' });
+    window.mermaid.run({ querySelector: 'pre.mermaid' }).catch(function () {});
+  }
+  /* 主 CDN 失败时依次尝试备用 CDN；全部失败则保留图表源码文本展示 */
+  function loadMermaidFallback() {
+    var fallbacks = [
+      'https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js'
+    ];
+    (function tryNext(i) {
+      if (i >= fallbacks.length) return;
+      var s = document.createElement('script');
+      s.src = fallbacks[i];
+      s.onload = initMermaid;
+      s.onerror = function () { s.remove(); tryNext(i + 1); };
+      document.head.appendChild(s);
+    })(0);
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js" onload="initMermaid()" onerror="this.remove();loadMermaidFallback();"></script>
+</body>
+</html>

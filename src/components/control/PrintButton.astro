@@ -219,6 +219,15 @@ const className = Astro.props.class ?? "";
             page-break-inside: avoid;
             break-inside: avoid-page;
         }
+        /* 打印时让超宽表格容器不再裁剪内容，表格允许跨页换行 */
+        #post-container .table-wrapper {
+            overflow: visible !important;
+            max-width: none !important;
+        }
+        #post-container .table-wrapper > table {
+            table-layout: auto !important;
+            width: 100% !important;
+        }
         #post-container img {
             max-width: 100% !important;
             height: auto !important;

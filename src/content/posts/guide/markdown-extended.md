@@ -52,6 +52,35 @@ The repo must be in the `owner/model` format. Pass `desc` to override the API de
 ::modelscope{repo="Qwen/Qwen2.5-7B-Instruct" desc="A custom description here"}
 ```
 
+## File Cards
+
+You can embed a downloadable file card in a post. Reference a file either from the `public` directory with a path starting with `/`, or from the `src` directory with a path without a leading `/` (mirroring the theme's image path handling).
+
+::file["/files/demo.pdf", "演示 PDF 文档"]
+
+::file{path="/files/demo.docx" name="演示 Word 文档"}
+
+::file{content/posts/notes/Drafts/the_manipulated_man.md, "src 目录下的文件"}
+
+The card shows the file name, size and a format-colored icon (PDF = red, Word = blue with a "W", Excel = green, PowerPoint = orange, …). Clicking the card (or the download button on the right) downloads the file. The card lifts up on hover.
+
+```markdown
+::file["/files/note.pdf"]
+::file["/files/note.pdf", "自定义显示名称"]
+::file{path="/files/note.docx" name="属性写法"}
+::file{"/files/note.docx", "花括号写法"}
+:file{"/files/note.docx"}
+:file{/files/note.docx}
+
+# src 目录下的文件（路径不以 / 开头）
+::file{content/posts/notes/Drafts/the_manipulated_man.md}
+:file{content/posts/notes/Drafts/the_manipulated_man.md}
+```
+
+The first argument is the file path, the optional second argument overrides the displayed name (defaults to the file name). Paths starting with `/` resolve relative to the `public` directory (e.g. `/files/note.pdf` → `public/files/note.pdf`); paths without a leading `/` resolve relative to the `src` directory (e.g. `notes/note.pdf` → `src/notes/note.pdf`), matching the theme's image handling. Files under `src/` are copied into the build output under the `/download/` prefix so the download link keeps working after deployment.
+
+Both square-bracket labels (`["path", "name"]`) and brace labels (`{"path", "name"}`) are accepted, with either one or two colons; quotes around the arguments are optional.
+
 ## Admonitions
 
 Following types of admonitions are supported: `note` `tip` `important` `warning` `caution`

@@ -40,4 +40,25 @@ document.addEventListener("click", function (e: MouseEvent) {
         target.setAttribute("data-timeout-id", newTimeoutId.toString());
     }
 });
+
+// 将 .custom-md 中的超宽表格包裹到可横向滚动的容器中
+function wrapTables() {
+    document.querySelectorAll('.custom-md table').forEach(table => {
+        const parent = table.parentElement;
+        if (!parent || parent.classList.contains('table-wrapper')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        parent.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wrapTables);
+} else {
+    wrapTables();
+}
+// Swup 页面切换后重新包裹
+document.addEventListener('swup:content:replace', wrapTables);
+document.addEventListener('swup:page:view', wrapTables);
 </script>

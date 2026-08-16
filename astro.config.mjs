@@ -19,6 +19,8 @@ import { expressiveCodeConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
+import { rehypeFileCard } from "./src/plugins/rehype-component-file-card.mjs";
+import { viteFileCardSrc } from "./src/plugins/vite-file-card-src.mjs";
 import {
 	GithubCardComponent,
 	HuggingfaceCardComponent,
@@ -26,6 +28,7 @@ import {
 } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
+import { remarkFileCardBrace } from "./src/plugins/remark-file-card-brace.mjs";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
@@ -130,11 +133,13 @@ export default defineConfig({
 			remarkExcerpt,
 			remarkGithubAdmonitionsToDirectives,
 			remarkDirective,
+			remarkFileCardBrace,
 			remarkSectionize,
 			parseDirectiveNode,
 		],
 		rehypePlugins: [
 			rehypeLazyImages,
+			rehypeFileCard,
 			rehypeKatex,
 			rehypeSlug,
 			[
@@ -178,6 +183,7 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		plugins: [viteFileCardSrc()],
 		optimizeDeps: {
 			exclude: ["@swup/astro"],
 		},
