@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# generated card data (fetched by scripts/fetch-card-data.mjs)
+src/data/card-data.json
+
 # generated types
 .astro/
 

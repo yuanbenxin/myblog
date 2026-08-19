@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Fetch card data (ModelScope / HF avatars)
+        run: pnpm fetch:cards
+
       - name: Build with Astro
         env:
           # GitHub Pages serves the site at https://<user>.github.io/<repo>/

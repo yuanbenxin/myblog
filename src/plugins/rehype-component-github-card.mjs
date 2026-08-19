@@ -1,4 +1,5 @@
 /// <reference types="mdast" />
+import { readFileSync } from "node:fs";
 import { h } from "hastscript";
 
 // API endpoints for each platform. The card fetches repository/model info
@@ -11,11 +12,26 @@ const GITHUB_API_BASE = "https://api.github.com";
 //   Origin, so cross-origin fetches work from any site. Swap to the official
 //   API by using "https://huggingface.co/api" instead.
 const HF_API_BASE = "https://hf-mirror.com/api";
-// - ModelScope: the API is NOT CORS-enabled. Requests are routed through the
-//   site's own Netlify Function proxy (see netlify/functions/card-proxy.js).
-//   The same proxy also extracts real avatars for Hugging Face models, since
-//   no public HF API exposes the avatar URL.
-const CARD_PROXY_ENDPOINT = "/.netlify/functions/card-proxy";
+
+// Build-time data for platforms whose APIs cannot be called from the browser:
+// ModelScope has no CORS support, and no public HF API exposes author avatars.
+// `scripts/fetch-card-data.mjs` (`pnpm fetch:cards`, also run by the GitHub
+// Pages workflow) writes this file before the build; cards inline the data
+// instead of fetching at runtime. Missing file (e.g. fresh local checkout)
+// degrades to placeholder cards.
+let prefetchedData = null;
+try {
+	prefetchedData = JSON.parse(
+		readFileSync(new URL("../data/card-data.json", import.meta.url), "utf8"),
+	);
+} catch {
+	prefetchedData = null;
+}
+
+function getPrefetch(platform, repo) {
+	if (!prefetchedData || !prefetchedData[platform]) return null;
+	return prefetchedData[platform][repo] || null;
+}
 
 const PLATFORMS = {
 	github: {
@@ -33,8 +49,6 @@ const PLATFORMS = {
 		metrics: ["likes", "downloads", "license", "library"],
 	},
 	modelscope: {
-		apiUrl: (repo) =>
-			`${CARD_PROXY_ENDPOINT}?platform=modelscope&repo=${encodeURIComponent(repo)}`,
 		href: (repo) => `https://modelscope.cn/models/${repo}`,
 		logoClass: "modelscope-logo",
 		allowSingleSegment: false,
@@ -51,6 +65,15 @@ const METRICS = {
 	language: { className: "gc-language", initial: "Waiting..." },
 	library: { className: "gc-library", initial: "Waiting..." },
 };
+
+// Mirrors the runtime formatter used in cardScript().
+const fmt = (n) =>
+	new Intl.NumberFormat("en-us", {
+		notation: "compact",
+		maximumFractionDigits: 1,
+	})
+		.format(Number(n) || 0)
+		.replace(String.fromCharCode(0x202f), "");
 
 /**
  * Creates a repository/model card component.
@@ -87,12 +110,13 @@ function createCard(platform, properties, children) {
 	const cardUuid = `GC${Math.random().toString(36).slice(-6)}${platform.slice(0, 2)}${Math.random().toString(36).slice(-2)}`; // Collisions are not important
 	const owner = name.includes("/") ? name.split("/")[0] : "";
 	const modelName = name.includes("/") ? name.split("/")[1] : name;
+	const prefetch = getPrefetch(platform, name);
 
 	const nAvatar = h(`div#${cardUuid}-avatar`, { class: "gc-avatar" });
 
 	const nTitle = h("div", { class: "gc-titlebar" }, [
 		h("div", { class: "gc-titlebar-left" }, [
-			...owner
+			...(owner
 				? [
 						h("div", { class: "gc-owner" }, [
 							nAvatar,
@@ -100,21 +124,74 @@ function createCard(platform, properties, children) {
 						]),
 						h("div", { class: "gc-divider" }, "/"),
 					]
-				: [],
+				: []),
 			h("div", { class: "gc-repo" }, modelName),
 		]),
 		h(`div.${config.logoClass}`),
 	]);
+
+	if (platform === "modelscope") {
+		// ModelScope cards are rendered entirely at build time from the
+		// prefetched data; no runtime fetch script is emitted.
+		const d = prefetch?.Data ?? null;
+		const textDesc = desc || d?.Description || "Description not set";
+		const avatarUrl = logo || d?.Organization?.Avatar || d?.Avatar || null;
+		if (avatarUrl) {
+			nAvatar.properties.style = `background-image: url('${avatarUrl}'); background-color: transparent;`;
+		}
+		const nDescription = h(
+			`div#${cardUuid}-description`,
+			{ class: "gc-description" },
+			textDesc,
+		);
+		const nMetrics = config.metrics.map((key) => {
+			const metric = METRICS[key];
+			let value = metric.initial;
+			if (d) {
+				switch (key) {
+					case "stars":
+						value = fmt(d.Stars);
+						break;
+					case "downloads":
+						value = fmt(d.Downloads);
+						break;
+					case "license":
+						value = d.License || "no-license";
+						break;
+					case "library":
+						value = d?.Libraries?.[0] || "model";
+						break;
+				}
+			}
+			return h(`span#${cardUuid}-${key}`, { class: metric.className }, value);
+		});
+		const nInfobar = h("div", { class: "gc-infobar" }, nMetrics);
+		return h(
+			`a#${cardUuid}-card`,
+			{
+				class: `card-github no-styling platform-${platform}`,
+				href: config.href(name),
+				target: "_blank",
+				repo: name,
+				"data-platform": platform,
+			},
+			[nTitle, nDescription, nInfobar],
+		);
+	}
 
 	let nDescription;
 	let script;
 
 	if (platform === "huggingface" && !desc) {
 		// Hugging Face has no API description: show framework + task badges.
-		nDescription = h(`div#${cardUuid}-description`, { class: "gc-description" }, [
-			h(`span#${cardUuid}-library-badge`, { class: "gc-badge" }),
-			h(`span#${cardUuid}-pipeline-badge`, { class: "gc-badge" }),
-		]);
+		nDescription = h(
+			`div#${cardUuid}-description`,
+			{ class: "gc-description" },
+			[
+				h(`span#${cardUuid}-library-badge`, { class: "gc-badge" }),
+				h(`span#${cardUuid}-pipeline-badge`, { class: "gc-badge" }),
+			],
+		);
 	} else {
 		nDescription = h(
 			`div#${cardUuid}-description`,
@@ -125,7 +202,11 @@ function createCard(platform, properties, children) {
 
 	const nMetrics = config.metrics.map((key) => {
 		const metric = METRICS[key];
-		return h(`span#${cardUuid}-${key}`, { class: metric.className }, metric.initial);
+		return h(
+			`span#${cardUuid}-${key}`,
+			{ class: metric.className },
+			metric.initial,
+		);
 	});
 
 	const nInfobar = h("div", { class: "gc-infobar" }, nMetrics);
@@ -138,6 +219,7 @@ function createCard(platform, properties, children) {
 						`document.getElementById('${cardUuid}-library-badge').textContent = data.library_name || 'model';`,
 						`document.getElementById('${cardUuid}-pipeline-badge').textContent = data.pipeline_tag || 'pipeline';`,
 					].join("\n");
+			const hfAvatar = prefetch;
 			script = cardScript(
 				cardUuid,
 				platform,
@@ -160,39 +242,10 @@ function createCard(platform, properties, children) {
 	  ${
 			logo
 				? `setAvatar(${JSON.stringify(logo)});`
-				: `if (data.author) {
-	    fetch('${CARD_PROXY_ENDPOINT}?platform=hfavatar&repo=' + encodeURIComponent('${name}'))
-	      .then(r => r.json())
-	      .then(d => setAvatar(d.avatarUrl))
-	      .catch(() => {});
-	  }`
+				: hfAvatar
+					? `setAvatar(${JSON.stringify(hfAvatar)});`
+					: ""
 		}
-`,
-			);
-			break;
-		}
-		case "modelscope": {
-			const descCode = desc
-				? `document.getElementById('${cardUuid}-description').textContent = ${JSON.stringify(desc)};`
-				: `document.getElementById('${cardUuid}-description').innerText = (data.Data && data.Data.Description) || 'Description not set';`;
-			script = cardScript(
-				cardUuid,
-				platform,
-				name,
-				config.apiUrl(name),
-				`
-	  const d = (data && data.Data) || {};
-	  ${descCode}
-	  document.getElementById('${cardUuid}-stars').innerText = fmt(d.Stars);
-	  document.getElementById('${cardUuid}-downloads').innerText = fmt(d.Downloads);
-	  document.getElementById('${cardUuid}-license').innerText = d.License || 'no-license';
-	  document.getElementById('${cardUuid}-library').innerText = (d.Libraries && d.Libraries[0]) || 'model';
-	  const avatarEl = document.getElementById('${cardUuid}-avatar');
-	  const avatarUrl = (d.Organization && d.Organization.Avatar) || d.Avatar;
-	  if (avatarUrl) {
-	    avatarEl.style.backgroundImage = 'url(' + avatarUrl + ')';
-	    avatarEl.style.backgroundColor = 'transparent';
-	  }
 `,
 			);
 			break;

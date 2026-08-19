@@ -30,7 +30,7 @@ You can add dynamic cards for Hugging Face models. On page load, the model info 
 
 Both `owner/model` and single-segment ids (e.g. `t5-large`) are supported. Since the Hugging Face API does not expose a description, the description row shows the framework and pipeline task as badges by default — pass `desc` to override it.
 
-The author avatar is fetched through the Netlify proxy (which extracts it from the model page). You can also pin a custom logo with `logo`, accepting an absolute URL or a site-relative path:
+The author avatar is fetched at build time (from the model page) by `scripts/fetch-card-data.mjs`, which the GitHub Pages workflow runs before building. Locally, run `pnpm fetch:cards` to refresh the data. You can also pin a custom logo with `logo`, accepting an absolute URL or a site-relative path:
 
 ```markdown
 ::huggingface{repo="t5-large"}
@@ -41,7 +41,7 @@ The author avatar is fetched through the Netlify proxy (which extracts it from t
 
 ## ModelScope Model Cards
 
-You can add dynamic cards for ModelScope models. The ModelScope API is not CORS-enabled, so requests are routed through the site's own Netlify Function (see `netlify/functions/card-proxy.mjs`).
+You can add cards for ModelScope models. The ModelScope API is not CORS-enabled, so model info (including the organization avatar) is fetched at build time by `scripts/fetch-card-data.mjs` and inlined into the page — the GitHub Pages workflow runs it automatically before building, or run `pnpm fetch:cards` locally.
 
 ::modelscope{repo="Qwen/Qwen2.5-7B-Instruct"}
 
