@@ -46,6 +46,35 @@ const rehypeLazyImages = () => (tree) => {
 	});
 };
 
+// Prefix site-absolute paths (starting with "/") with the base path, so
+// links/iframes/images written for local dev also work when the site is
+// deployed under a sub-path (BASE=/myblog/ in the GitHub Pages workflow).
+// Runs after rehypeComponents so directive-rendered markup is covered too.
+// Raw HTML nodes (hand-written <iframe>/<img> tags) are rewritten via regex.
+const rehypeBaseUrls = () => (tree) => {
+	const base = (process.env.BASE || "/").replace(/\/+$/, "");
+	if (base === "") return; // root deployment: nothing to prefix
+	const escaped = base.slice(1).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	const rawRe = new RegExp(
+		`(\\s(?:src|href)=")\\/(?!\\/)(?!${escaped})`,
+		"g",
+	);
+	visit(tree, (node) => {
+		if (node.type === "raw") {
+			node.value = node.value.replace(rawRe, `$1${base}/`);
+			return;
+		}
+		if (node.type !== "element" || !node.properties) return;
+		for (const prop of ["href", "src"]) {
+			const value = node.properties[prop];
+			if (typeof value !== "string") continue;
+			if (!value.startsWith("/") || value.startsWith("//")) continue;
+			if (value.startsWith(base)) continue;
+			node.properties[prop] = `${base}${value}`;
+		}
+	});
+};
+
 export default defineConfig({
 	site: site,
 	base: base,
@@ -157,6 +186,7 @@ export default defineConfig({
 					},
 				},
 			],
+			rehypeBaseUrls,
 			[
 				rehypeAutolinkHeadings,
 				{

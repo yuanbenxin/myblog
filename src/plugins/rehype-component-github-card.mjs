@@ -310,7 +310,7 @@ function cardScript(cardUuid, platform, repo, apiUrl, fillCode) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 10000);
   try {
-    const response = await fetch('${apiUrl}', { referrerPolicy: "no-referrer", signal: controller.signal });
+    const response = await fetch('${apiUrl}', { signal: controller.signal });
     const data = await response.json();
     ${fillCode}
     $('card').classList.remove('fetch-waiting');
