@@ -1,6 +1,7 @@
 // Build-time prefetch for repository/model card data that cannot be fetched
-// from the browser (ModelScope API has no CORS support; Hugging Face does not
-// expose author avatars via any public API).
+// from the browser (ModelScope API has no CORS support; Hugging Face avatar
+// URLs are not exposed by any public API, and the mirror's CORS behavior is
+// unreliable in real browsers).
 //
 // Scans all markdown sources for `::modelscope{...}` / `::huggingface{...}`
 // directives and writes the results to `src/data/card-data.json`, which the
@@ -18,6 +19,7 @@ const OUTPUT_FILE = fileURLToPath(
 	new URL("../src/data/card-data.json", import.meta.url),
 );
 const MODEL_SCOPE_API = "https://www.modelscope.cn/api/v1/models";
+const HF_API_BASE = "https://hf-mirror.com/api";
 const HF_WEB_BASE = "https://hf-mirror.com";
 const FETCH_TIMEOUT_MS = 15000;
 
@@ -86,6 +88,20 @@ async function fetchHfAvatar(repo) {
 	}
 }
 
+async function fetchHfModel(repo) {
+	const data = await fetchJson(`${HF_API_BASE}/models/${repo}`);
+	const lic = (data.tags || []).find((t) => t.startsWith("license:"));
+	return {
+		likes: data.likes,
+		downloads: data.downloads,
+		license: (lic
+			? lic.replace("license:", "")
+			: (data.cardData && data.cardData.license)) || "no-license",
+		library: data.library_name || "model",
+		pipeline: data.pipeline_tag || "pipeline",
+	};
+}
+
 const files = walkMarkdown(CONTENT_DIR);
 const directives = files.flatMap((file) => collectDirectives(file));
 
@@ -94,23 +110,28 @@ const modelscopeRepos = [
 		directives.filter((d) => d.platform === "modelscope").map((d) => d.repo),
 	),
 ];
-const hfAvatarRepos = [
+const hfRepos = [
 	...new Set(
-		directives
-			.filter((d) => d.platform === "huggingface" && !d.logo && d.repo.includes("/"))
-			.map((d) => d.repo),
+		directives.filter((d) => d.platform === "huggingface").map((d) => d.repo),
 	),
 ];
+const hfAvatarRepos = hfRepos.filter((repo) => repo.includes("/"));
 
 console.log(
-	`[fetch-card-data] Scanning ${files.length} files: ${modelscopeRepos.length} ModelScope repo(s), ${hfAvatarRepos.length} HF avatar(s)`,
+	`[fetch-card-data] Scanning ${files.length} files: ${modelscopeRepos.length} ModelScope repo(s), ${hfRepos.length} HF repo(s)`,
 );
 
-const [modelscopeResults, hfAvatarResults] = await Promise.all([
+const [modelscopeResults, hfModelResults, hfAvatarResults] = await Promise.all([
 	Promise.allSettled(
 		modelscopeRepos.map(async (repo) => {
 			const data = await fetchJson(`${MODEL_SCOPE_API}/${repo}`);
 			return { repo, data };
+		}),
+	),
+	Promise.allSettled(
+		hfRepos.map(async (repo) => {
+			const model = await fetchHfModel(repo);
+			return { repo, model };
 		}),
 	),
 	Promise.allSettled(
@@ -130,17 +151,31 @@ for (const result of modelscopeResults) {
 	}
 }
 
-const hfAvatar = {};
+const huggingface = {};
+for (const result of hfModelResults) {
+	if (result.status === "fulfilled") {
+		huggingface[result.value.repo] = result.value.model;
+	} else {
+		console.warn(`[fetch-card-data] (Warn) HF model fetch failed: ${result.reason}`);
+	}
+}
 for (const result of hfAvatarResults) {
 	if (result.status === "fulfilled") {
-		hfAvatar[result.value.repo] = result.value.avatarUrl;
+		const model = huggingface[result.value.repo] || {};
+		huggingface[result.value.repo] = {
+			...model,
+			avatarUrl: result.value.avatarUrl,
+		};
 	} else {
 		console.warn(`[fetch-card-data] (Warn) HF avatar fetch failed: ${result.reason}`);
 	}
 }
 
 mkdirSync(join(OUTPUT_FILE, ".."), { recursive: true });
-writeFileSync(OUTPUT_FILE, JSON.stringify({ modelscope, hfAvatar }, null, 2));
+writeFileSync(
+	OUTPUT_FILE,
+	JSON.stringify({ modelscope, huggingface }, null, 2),
+);
 console.log(
-	`[fetch-card-data] Wrote ${OUTPUT_FILE} (${Object.keys(modelscope).length} ModelScope, ${Object.keys(hfAvatar).length} HF avatars)`,
+	`[fetch-card-data] Wrote ${OUTPUT_FILE} (${Object.keys(modelscope).length} ModelScope, ${Object.keys(huggingface).length} HF)`,
 );

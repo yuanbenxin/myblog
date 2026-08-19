@@ -2,23 +2,16 @@
 import { readFileSync } from "node:fs";
 import { h } from "hastscript";
 
-// API endpoints for each platform. The card fetches repository/model info
-// at runtime from the browser.
-// - GitHub: the official API is CORS-enabled (`*`). Domestic mirrors for the
-//   JSON API are unreliable, so a configurable base URL is kept here to swap
-//   to one later if needed.
+// API endpoint for GitHub, whose official API is CORS-enabled (`*`).
 const GITHUB_API_BASE = "https://api.github.com";
-// - Hugging Face: domestic mirror (hf-mirror.com) echoes back any request
-//   Origin, so cross-origin fetches work from any site. Swap to the official
-//   API by using "https://huggingface.co/api" instead.
-const HF_API_BASE = "https://hf-mirror.com/api";
 
-// Build-time data for platforms whose APIs cannot be called from the browser:
-// ModelScope has no CORS support, and no public HF API exposes author avatars.
-// `scripts/fetch-card-data.mjs` (`pnpm fetch:cards`, also run by the GitHub
-// Pages workflow) writes this file before the build; cards inline the data
-// instead of fetching at runtime. Missing file (e.g. fresh local checkout)
-// degrades to placeholder cards.
+// Build-time data for platforms whose APIs cannot be fetched reliably from
+// the browser: ModelScope has no CORS support, and the Hugging Face mirror's
+// CORS/Origin handling is unreliable in real browsers. `scripts/fetch-card-data.mjs`
+// (`pnpm fetch:cards`, also run by the GitHub Pages workflow) writes this file
+// before the build; ModelScope and Hugging Face cards inline the data (avatar,
+// metrics, badges) instead of fetching at runtime. Missing file (e.g. fresh
+// local checkout) degrades to placeholder cards.
 let prefetchedData = null;
 try {
 	prefetchedData = JSON.parse(
@@ -42,7 +35,6 @@ const PLATFORMS = {
 		metrics: ["stars", "forks", "license", "language"],
 	},
 	huggingface: {
-		apiUrl: (repo) => `${HF_API_BASE}/models/${repo}`,
 		href: (repo) => `https://huggingface.co/${repo}`,
 		logoClass: "huggingface-logo",
 		allowSingleSegment: true,
@@ -130,37 +122,83 @@ function createCard(platform, properties, children) {
 		h(`div.${config.logoClass}`),
 	]);
 
-	if (platform === "modelscope") {
-		// ModelScope cards are rendered entirely at build time from the
-		// prefetched data; no runtime fetch script is emitted.
-		const d = prefetch?.Data ?? null;
-		const textDesc = desc || d?.Description || "Description not set";
-		const avatarUrl = logo || d?.Organization?.Avatar || d?.Avatar || null;
+	if (platform === "modelscope" || platform === "huggingface") {
+		// ModelScope and Hugging Face cards are rendered entirely at build
+		// time from the prefetched data; no runtime fetch script is emitted.
+		const d = prefetch ?? null;
+		let nDescription;
+		if (platform === "huggingface" && !desc) {
+			// Hugging Face has no API description: show framework + task badges.
+			nDescription = h(
+				`div#${cardUuid}-description`,
+				{ class: "gc-description" },
+				[
+					h(
+						`span#${cardUuid}-library-badge`,
+						{ class: "gc-badge" },
+						d?.library || "model",
+					),
+					h(
+						`span#${cardUuid}-pipeline-badge`,
+						{ class: "gc-badge" },
+						d?.pipeline || "pipeline",
+					),
+				],
+			);
+		} else {
+			const textDesc =
+				platform === "modelscope"
+					? desc || d?.Data?.Description || "Description not set"
+					: desc || "Description not set";
+			nDescription = h(
+				`div#${cardUuid}-description`,
+				{ class: "gc-description" },
+				textDesc,
+			);
+		}
+		const avatarUrl =
+			logo ||
+			(platform === "modelscope"
+				? d?.Data?.Organization?.Avatar || d?.Data?.Avatar
+				: d?.avatarUrl) ||
+			null;
 		if (avatarUrl) {
 			nAvatar.properties.style = `background-image: url('${avatarUrl}'); background-color: transparent;`;
 		}
-		const nDescription = h(
-			`div#${cardUuid}-description`,
-			{ class: "gc-description" },
-			textDesc,
-		);
 		const nMetrics = config.metrics.map((key) => {
 			const metric = METRICS[key];
 			let value = metric.initial;
 			if (d) {
-				switch (key) {
-					case "stars":
-						value = fmt(d.Stars);
-						break;
-					case "downloads":
-						value = fmt(d.Downloads);
-						break;
-					case "license":
-						value = d.License || "no-license";
-						break;
-					case "library":
-						value = d?.Libraries?.[0] || "model";
-						break;
+				if (platform === "modelscope") {
+					switch (key) {
+						case "stars":
+							value = fmt(d.Data.Stars);
+							break;
+						case "downloads":
+							value = fmt(d.Data.Downloads);
+							break;
+						case "license":
+							value = d.Data.License || "no-license";
+							break;
+						case "library":
+							value = d.Data?.Libraries?.[0] || "model";
+							break;
+					}
+				} else {
+					switch (key) {
+						case "likes":
+							value = fmt(d.likes);
+							break;
+						case "downloads":
+							value = fmt(d.downloads);
+							break;
+						case "license":
+							value = d.license || "no-license";
+							break;
+						case "library":
+							value = d.library || "model";
+							break;
+					}
 				}
 			}
 			return h(`span#${cardUuid}-${key}`, { class: metric.className }, value);
@@ -179,26 +217,11 @@ function createCard(platform, properties, children) {
 		);
 	}
 
-	let nDescription;
-	let script;
-
-	if (platform === "huggingface" && !desc) {
-		// Hugging Face has no API description: show framework + task badges.
-		nDescription = h(
-			`div#${cardUuid}-description`,
-			{ class: "gc-description" },
-			[
-				h(`span#${cardUuid}-library-badge`, { class: "gc-badge" }),
-				h(`span#${cardUuid}-pipeline-badge`, { class: "gc-badge" }),
-			],
-		);
-	} else {
-		nDescription = h(
-			`div#${cardUuid}-description`,
-			{ class: "gc-description" },
-			"Waiting for API...",
-		);
-	}
+	const nDescription = h(
+		`div#${cardUuid}-description`,
+		{ class: "gc-description" },
+		"Waiting for API...",
+	);
 
 	const nMetrics = config.metrics.map((key) => {
 		const metric = METRICS[key];
@@ -211,65 +234,22 @@ function createCard(platform, properties, children) {
 
 	const nInfobar = h("div", { class: "gc-infobar" }, nMetrics);
 
-	switch (platform) {
-		case "huggingface": {
-			const descCode = desc
-				? `document.getElementById('${cardUuid}-description').textContent = ${JSON.stringify(desc)};`
-				: [
-						`document.getElementById('${cardUuid}-library-badge').textContent = data.library_name || 'model';`,
-						`document.getElementById('${cardUuid}-pipeline-badge').textContent = data.pipeline_tag || 'pipeline';`,
-					].join("\n");
-			const hfAvatar = prefetch;
-			script = cardScript(
-				cardUuid,
-				platform,
-				name,
-				config.apiUrl(name),
-				`
-	  ${descCode}
-	  document.getElementById('${cardUuid}-likes').innerText = fmt(data.likes);
-	  document.getElementById('${cardUuid}-downloads').innerText = fmt(data.downloads);
-	  const lic = (data.tags || []).find(t => t.startsWith('license:'));
-	  document.getElementById('${cardUuid}-license').innerText = (lic ? lic.replace('license:', '') : (data.cardData && data.cardData.license) || 'no-license');
-	  document.getElementById('${cardUuid}-library').innerText = data.library_name || 'model';
-	  const avatarEl = document.getElementById('${cardUuid}-avatar');
-	  const setAvatar = (url) => {
-	    if (url) {
-	      avatarEl.style.backgroundImage = 'url(' + url + ')';
-	      avatarEl.style.backgroundColor = 'transparent';
-	    }
-	  };
-	  ${
-			logo
-				? `setAvatar(${JSON.stringify(logo)});`
-				: hfAvatar
-					? `setAvatar(${JSON.stringify(hfAvatar)});`
-					: ""
-		}
+	const script = cardScript(
+		cardUuid,
+		platform,
+		name,
+		config.apiUrl(name),
+		`
+  document.getElementById('${cardUuid}-description').innerText = data.description && data.description.replace(/:[a-zA-Z0-9_]+:/g, '') || 'Description not set';
+  document.getElementById('${cardUuid}-language').innerText = data.language;
+  document.getElementById('${cardUuid}-forks').innerText = fmt(data.forks);
+  document.getElementById('${cardUuid}-stars').innerText = fmt(data.stargazers_count);
+  const avatarEl = document.getElementById('${cardUuid}-avatar');
+  avatarEl.style.backgroundImage = 'url(' + data.owner.avatar_url + ')';
+  avatarEl.style.backgroundColor = 'transparent';
+  document.getElementById('${cardUuid}-license').innerText = (data.license && data.license.spdx_id) || 'no-license';
 `,
-			);
-			break;
-		}
-		default: {
-			script = cardScript(
-				cardUuid,
-				platform,
-				name,
-				config.apiUrl(name),
-				`
-	  document.getElementById('${cardUuid}-description').innerText = data.description && data.description.replace(/:[a-zA-Z0-9_]+:/g, '') || 'Description not set';
-	  document.getElementById('${cardUuid}-language').innerText = data.language;
-	  document.getElementById('${cardUuid}-forks').innerText = fmt(data.forks);
-	  document.getElementById('${cardUuid}-stars').innerText = fmt(data.stargazers_count);
-	  const avatarEl = document.getElementById('${cardUuid}-avatar');
-	  avatarEl.style.backgroundImage = 'url(' + data.owner.avatar_url + ')';
-	  avatarEl.style.backgroundColor = 'transparent';
-	  document.getElementById('${cardUuid}-license').innerText = (data.license && data.license.spdx_id) || 'no-license';
-`,
-			);
-			break;
-		}
-	}
+	);
 
 	return h(
 		`a#${cardUuid}-card`,
