@@ -1,11 +1,1083 @@
 ---
 import BlankLayout from "../layouts/BlankLayout.astro";
+import zjUrl from "../assets/images/zj.jpg";
+import zfUrl from "../assets/images/zf.png";
+import bgmUrl from "../assets/bgm.mp3";
 ---
 
-<BlankLayout
-	title="教师节快乐"
-	description="教师节快乐"
->
-	<!-- 在这里添加内容 -->
-	<div class="min-h-screen"></div>
+<BlankLayout title="教师节快乐" description="高三23班 · 教师节特别企划">
+	<link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+	<link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		slot="head"
+		href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&display=swap"
+		rel="stylesheet"
+	/>
+
+	<div id="td-root">
+		<!-- ===== 加载页 ===== -->
+		<div id="td-loader">
+			<div class="td-loader-inner">
+				<svg class="td-loader-flower" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true">
+					<g class="td-flower-spin">
+						<circle cx="50" cy="30" r="13" fill="#FF8C42" opacity=".9" />
+						<circle cx="68" cy="44" r="13" fill="#FF6F61" opacity=".9" />
+						<circle cx="61" cy="66" r="13" fill="#FFD166" opacity=".9" />
+						<circle cx="39" cy="66" r="13" fill="#FF8C42" opacity=".9" />
+						<circle cx="32" cy="44" r="13" fill="#FF6F61" opacity=".9" />
+						<circle cx="50" cy="50" r="10" fill="#C08552" />
+					</g>
+					<rect x="47" y="60" width="6" height="30" rx="3" fill="#7FB069" />
+				</svg>
+				<h1 class="td-loader-title">教师节快乐</h1>
+				<div class="td-progress"><div id="td-progress-bar"></div></div>
+				<p id="td-progress-text">正在准备惊喜… 0%</p>
+				<button id="td-retry" class="td-btn" type="button" hidden>
+					<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="currentColor"/></svg>
+					加载失败，点击重试
+				</button>
+				<button id="td-start" class="td-btn td-btn-primary" type="button" hidden>
+					<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+					开始播放
+				</button>
+				<p class="td-loader-tip" id="td-loader-tip">建议佩戴耳机，以获得最佳体验</p>
+			</div>
+		</div>
+
+		<!-- ===== 主舞台 ===== -->
+		<div id="td-stage" aria-hidden="true">
+			<canvas id="td-petals"></canvas>
+
+			<!-- 1 封面 -->
+			<section class="td-page" id="td-p-cover">
+				<div class="td-cover-box">
+					<svg class="td-cover-deco" viewBox="0 0 200 60" aria-hidden="true">
+						<path d="M10 45 Q60 10 100 40 T190 30" stroke="#FFD166" stroke-width="5" fill="none" stroke-linecap="round" class="td-chalk-line"/>
+						<path d="M20 52 Q70 25 110 48 T185 42" stroke="#FF8C42" stroke-width="4" fill="none" stroke-linecap="round" class="td-chalk-line td-chalk-line2"/>
+					</svg>
+					<h1 class="td-cover-title" id="td-cover-title">教师节快乐</h1>
+					<p class="td-cover-sub" id="td-cover-sub">高三23班同学 · 敬上</p>
+					<svg class="td-cover-board" viewBox="0 0 320 200" aria-hidden="true">
+						<rect x="20" y="20" width="280" height="140" rx="10" fill="#5C8D74"/>
+						<rect x="20" y="20" width="280" height="140" rx="10" fill="none" stroke="#C08552" stroke-width="10"/>
+						<rect x="60" y="160" width="200" height="12" rx="6" fill="#C08552"/>
+						<text x="70" y="85" font-size="34" fill="#FFF8F0" font-family="'Ma Shan Zheng',cursive">9.10</text>
+						<text x="70" y="125" font-size="20" fill="#FFE8CC" font-family="'Ma Shan Zheng',cursive">Thank you, teacher</text>
+						<rect x="230" y="150" width="34" height="8" rx="4" fill="#FFF"/>
+						<rect x="200" y="151" width="24" height="7" rx="3.5" fill="#FFD166"/>
+					</svg>
+				</div>
+			</section>
+
+			<!-- 2 开场 -->
+			<section class="td-page" id="td-p-open">
+				<div class="td-lines">
+					<p class="td-line">九月的风，吹来了属于您的节日</p>
+					<p class="td-line">三尺讲台，是您耕耘的天地</p>
+					<p class="td-line">一支粉笔，写下我们的未来</p>
+					<p class="td-line">今天，请允许我们郑重地说一句——</p>
+					<p class="td-line td-line-strong">老师，节日快乐！</p>
+				</div>
+			</section>
+
+			<!-- 3 回忆 -->
+			<section class="td-page" id="td-p-memory">
+				<div class="td-memcard" id="td-memcard">
+					<p class="td-mline">还记得吗 ——</p>
+					<p class="td-mline">早读课上此起彼伏的读书声</p>
+					<p class="td-mline">晚自习窗外渐渐暗下来的天色</p>
+					<p class="td-mline">黑板上的公式擦了又写、写了又擦</p>
+					<p class="td-mline td-line-strong">而您的身影，始终在讲台前</p>
+				</div>
+			</section>
+
+			<!-- 4 成长 -->
+			<section class="td-page" id="td-p-growth">
+				<p class="td-growth-cap" id="td-growth-cap">您陪我们走过的每一步</p>
+				<div class="td-timeline" id="td-timeline">
+					<div class="td-track"><div class="td-track-fill" id="td-track-fill"></div></div>
+					<div class="td-nodes">
+						<div class="td-node"><i></i><span>懵懂</span></div>
+						<div class="td-node"><i></i><span>探索</span></div>
+						<div class="td-node"><i></i><span>坚持</span></div>
+						<div class="td-node"><i></i><span>蜕变</span></div>
+						<div class="td-node"><i></i><span>远航</span></div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 5 感恩 -->
+			<section class="td-page" id="td-p-thanks">
+				<svg class="td-thanks-svg" viewBox="0 0 640 220" aria-hidden="true">
+					<text id="td-thanks-text" x="320" y="150" text-anchor="middle"
+						font-size="150" font-family="'Ma Shan Zheng','ZCOOL KuaiLe',cursive"
+						fill="transparent" stroke="#FF6F61" stroke-width="2.5">感恩有您</text>
+				</svg>
+				<p class="td-thanks-sub" id="td-thanks-sub">桃李不言，下自成蹊</p>
+			</section>
+
+			<!-- 6 教师卡片 -->
+			<section class="td-page" id="td-p-cards">
+				<p class="td-cards-cap" id="td-cards-cap">这一站，遇见他们</p>
+				<div class="td-cards-row" id="td-cards-row"></div>
+			</section>
+
+			<!-- 教师详情（全屏放大） -->
+			<div id="td-detail">
+				<div class="td-detail-grid">
+					<div class="td-detail-photo" id="td-detail-photo"></div>
+					<div class="td-detail-main">
+						<h2 class="td-detail-name" id="td-detail-name"></h2>
+						<p class="td-detail-quote" id="td-detail-quote"></p>
+					</div>
+					<ul class="td-detail-facts" id="td-detail-facts"></ul>
+				</div>
+			</div>
+
+			<!-- 7 结尾 -->
+			<section class="td-page" id="td-p-ending">
+				<canvas id="td-fireworks"></canvas>
+				<div class="td-ending-box">
+					<h1 class="td-ending-title" id="td-ending-title">您辛苦了</h1>
+					<p class="td-ending-thanks" id="td-ending-thanks">Thanks for watching</p>
+					<p class="td-ending-credit" id="td-ending-credit">制作：本新同学 · 高三23班 · 2026</p>
+				</div>
+				<button id="td-replay" class="td-btn td-replay" type="button">
+					<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="currentColor"/></svg>
+					点击重播
+				</button>
+			</section>
+
+			<!-- 页码指示器 -->
+			<div id="td-dots" role="presentation"></div>
+
+			<!-- 静音 -->
+			<button id="td-mute" type="button" aria-label="静音切换">
+				<svg id="td-icon-sound" viewBox="0 0 24 24" width="22" height="22"><path d="M3 10v4h4l5 5V5L7 10H3z" fill="currentColor"/><path d="M16 8a5 5 0 0 1 0 8M18.5 5.5a9 9 0 0 1 0 13" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+				<svg id="td-icon-mute" viewBox="0 0 24 24" width="22" height="22" style="display:none"><path d="M3 10v4h4l5 5V5L7 10H3z" fill="currentColor"/><path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+			</button>
+		</div>
+	</div>
+
+	<style is:global>
+		/* ===== 教师节页面全局样式 ===== */
+		#td-root {
+			--td-cream: #fff8f0;
+			--td-apricot: #fff3e0;
+			--td-orange: #ff8c42;
+			--td-coral: #ff6f61;
+			--td-yellow: #ffd166;
+			--td-brown: #c08552;
+			--td-ink: #5b3a29;
+		}
+		#td-root, #td-root * { box-sizing: border-box; }
+
+		/* ---- 加载页 ---- */
+		#td-loader {
+			position: fixed; inset: 0; z-index: 200;
+			display: flex; align-items: center; justify-content: center;
+			background: linear-gradient(135deg, #fff8f0 0%, #fff3e0 45%, #ffe3c2 100%);
+			transition: opacity .6s ease, visibility .6s;
+		}
+		#td-loader.td-gone { opacity: 0; visibility: hidden; pointer-events: none; }
+		.td-loader-inner { text-align: center; padding: 24px; max-width: 420px; width: 100%; }
+		.td-flower-spin { transform-origin: 50px 50px; animation: td-spin 6s linear infinite; }
+		@keyframes td-spin { to { transform: rotate(360deg); } }
+		.td-loader-title {
+			font-family: "Ma Shan Zheng", "ZCOOL KuaiLe", "Yuanti SC", "YouYuan", cursive;
+			font-size: clamp(2rem, 8vw, 3rem); color: var(--td-ink); margin: 18px 0 22px;
+		}
+		.td-progress {
+			height: 10px; border-radius: 999px; overflow: hidden;
+			background: rgba(192,133,82,.18); box-shadow: inset 0 1px 3px rgba(91,58,41,.12);
+		}
+		#td-progress-bar {
+			height: 100%; width: 0%; border-radius: 999px;
+			background: linear-gradient(90deg, var(--td-yellow), var(--td-orange), var(--td-coral));
+			transition: width .25s ease;
+		}
+		#td-progress-text { margin-top: 10px; color: #a4764f; font-size: .9rem; }
+		.td-loader-tip { margin-top: 18px; color: #c4a07e; font-size: .8rem; }
+		.td-btn {
+			display: inline-flex; align-items: center; gap: 8px;
+			margin-top: 20px; padding: 12px 28px; border: none; cursor: pointer;
+			border-radius: 999px; font-size: 1rem; font-weight: 700; color: var(--td-ink);
+			background: #fff; box-shadow: 0 6px 18px rgba(192,133,82,.25);
+			transition: transform .18s ease, box-shadow .18s ease, background .18s;
+		}
+		.td-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 26px rgba(192,133,82,.35); }
+		.td-btn:active { transform: scale(.96); }
+		.td-btn-primary {
+			color: #fff; background: linear-gradient(120deg, var(--td-orange), var(--td-coral));
+			animation: td-breathe 1.6s ease-in-out infinite;
+		}
+		@keyframes td-breathe { 0%,100% { box-shadow: 0 6px 18px rgba(255,111,97,.35);} 50% { box-shadow: 0 6px 30px rgba(255,140,66,.65);} }
+
+		/* ---- 舞台 ---- */
+		#td-stage {
+			position: fixed; inset: 0; z-index: 60; overflow: hidden;
+			background:
+				radial-gradient(1200px 600px at 80% -10%, rgba(255,209,102,.25), transparent 60%),
+				radial-gradient(900px 500px at 10% 110%, rgba(255,111,97,.16), transparent 60%),
+				linear-gradient(160deg, var(--td-cream), var(--td-apricot));
+			opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility .8s;
+			touch-action: none;
+			font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+		}
+		#td-stage.td-on { opacity: 1; visibility: visible; }
+		#td-petals, #td-fireworks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+		.td-page {
+			position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+			opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility .45s;
+			padding: clamp(16px, 4vw, 48px);
+		}
+		.td-page.td-active { opacity: 1; visibility: visible; }
+
+		/* ---- 封面 ---- */
+		.td-cover-box { text-align: center; position: relative; }
+		.td-cover-deco { width: clamp(160px, 40vw, 280px); margin-bottom: -8px; }
+		.td-chalk-line { stroke-dasharray: 400; stroke-dashoffset: 400; }
+		.td-active .td-chalk-line { animation: td-draw 1.4s .9s ease forwards; }
+		.td-active .td-chalk-line2 { animation-delay: 1.15s; }
+		@keyframes td-draw { to { stroke-dashoffset: 0; } }
+		.td-cover-title {
+			font-family: "Ma Shan Zheng", "ZCOOL KuaiLe", "Yuanti SC", "YouYuan", cursive;
+			font-size: clamp(3rem, 13vw, 6.5rem); color: var(--td-ink); line-height: 1.15;
+			text-shadow: 0 4px 0 rgba(255,140,66,.18);
+		}
+		.td-cover-title .td-ch {
+			display: inline-block; opacity: 0; transform: translateY(60px) scale(.3) rotate(-12deg);
+		}
+		.td-active .td-cover-title .td-ch {
+			animation: td-chpop .7s cubic-bezier(.34,1.8,.5,1) forwards;
+			animation-delay: calc(.35s + var(--i) * .16s);
+		}
+		@keyframes td-chpop {
+			60% { opacity: 1; transform: translateY(-8px) scale(1.12) rotate(3deg); }
+			100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+		}
+		.td-cover-sub {
+			margin-top: 14px; font-size: clamp(1rem, 3.6vw, 1.4rem); letter-spacing: .35em;
+			color: var(--td-brown); opacity: 0; transform: translateY(16px);
+		}
+		.td-active .td-cover-sub { animation: td-fadeup .8s 1.5s ease forwards; }
+		@keyframes td-fadeup { to { opacity: 1; transform: translateY(0); } }
+		.td-cover-board {
+			width: clamp(220px, 56vw, 340px); margin-top: 22px;
+			opacity: 0; transform: translateY(30px) rotate(-2deg);
+			filter: drop-shadow(0 12px 24px rgba(192,133,82,.3));
+		}
+		.td-active .td-cover-board { animation: td-fadeup .9s 1.9s cubic-bezier(.34,1.56,.64,1) forwards; }
+
+		/* ---- 开场 / 回忆 ---- */
+		.td-lines { text-align: center; max-width: 760px; }
+		.td-line {
+			font-size: clamp(1.15rem, 4.4vw, 1.9rem); color: var(--td-ink);
+			margin: .65em 0; opacity: 0; transform: translateY(26px); filter: blur(6px);
+		}
+		.td-line-strong {
+			font-family: "Ma Shan Zheng", cursive; font-size: clamp(1.6rem, 6.4vw, 2.6rem);
+			color: var(--td-coral);
+		}
+		.td-active .td-line {
+			animation: td-linein .8s cubic-bezier(.22,1.2,.36,1) forwards;
+			animation-delay: calc(.3s + var(--i) * .75s);
+		}
+		@keyframes td-linein { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+
+		.td-memcard {
+			background: rgba(255,255,255,.75); backdrop-filter: blur(6px);
+			border: 2px solid rgba(255,140,66,.25); border-radius: 24px;
+			padding: clamp(22px, 5vw, 44px) clamp(26px, 6vw, 60px);
+			box-shadow: 0 20px 50px rgba(192,133,82,.28);
+			max-width: 720px; text-align: center;
+			opacity: 0; transform: perspective(900px) rotateX(18deg) translateY(40px);
+		}
+		.td-active .td-memcard {
+			animation: td-cardin .9s cubic-bezier(.34,1.56,.64,1) forwards, td-sway 5s 1s ease-in-out infinite alternate;
+		}
+		@keyframes td-cardin { to { opacity: 1; transform: perspective(900px) rotateX(0) translateY(0); } }
+		@keyframes td-sway {
+			from { transform: perspective(900px) rotateY(-3.5deg); }
+			to { transform: perspective(900px) rotateY(3.5deg); }
+		}
+		.td-mline {
+			font-size: clamp(1.05rem, 4vw, 1.7rem); color: var(--td-ink); margin: .6em 0;
+			opacity: 0; transform: translateX(-40px);
+		}
+		.td-mline:nth-child(even) { transform: translateX(40px); }
+		.td-active .td-mline {
+			animation: td-slidein .7s cubic-bezier(.22,1.2,.36,1) forwards;
+			animation-delay: calc(.7s + var(--i) * .62s);
+		}
+		@keyframes td-slidein { to { opacity: 1; transform: translateX(0); } }
+
+		/* ---- 成长时间轴 ---- */
+		.td-growth-cap {
+			position: absolute; top: 16%; left: 0; right: 0; text-align: center;
+			font-family: "Ma Shan Zheng", cursive; font-size: clamp(1.5rem, 5.6vw, 2.4rem);
+			color: var(--td-ink); opacity: 0; transform: translateY(20px);
+		}
+		.td-active .td-growth-cap { animation: td-fadeup .7s .2s ease forwards; }
+		.td-timeline { width: min(860px, 92vw); }
+		.td-track { height: 6px; border-radius: 999px; background: rgba(192,133,82,.2); overflow: hidden; }
+		.td-track-fill {
+			height: 100%; width: 0%; border-radius: 999px;
+			background: linear-gradient(90deg, var(--td-yellow), var(--td-orange), var(--td-coral));
+		}
+		.td-active .td-track-fill { animation: td-track 3.4s .5s ease-in-out forwards; }
+		@keyframes td-track { to { width: 100%; } }
+		.td-nodes { display: flex; justify-content: space-between; margin-top: -14px; }
+		.td-node { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 20%; }
+		.td-node i {
+			width: 22px; height: 22px; border-radius: 50%;
+			background: #fff; border: 4px solid rgba(192,133,82,.35);
+			transform: scale(.4); opacity: .5;
+		}
+		.td-node span {
+			font-size: clamp(.85rem, 3vw, 1.15rem); color: #a4764f; font-weight: 700;
+			opacity: 0; transform: translateY(12px);
+		}
+		.td-active .td-node i {
+			animation: td-nodepop .55s cubic-bezier(.34,2,.5,1) forwards;
+			animation-delay: calc(.55s + var(--i) * .62s);
+		}
+		.td-active .td-node span {
+			animation: td-fadeup .5s ease forwards;
+			animation-delay: calc(.7s + var(--i) * .62s);
+		}
+		@keyframes td-nodepop {
+			to { transform: scale(1); opacity: 1; border-color: var(--td-orange); background: var(--td-yellow); box-shadow: 0 0 0 8px rgba(255,209,102,.3), 0 0 22px rgba(255,140,66,.55); }
+		}
+
+		/* ---- 感恩 ---- */
+		.td-thanks-svg { width: min(640px, 88vw); overflow: visible; }
+		#td-thanks-text { stroke-dasharray: 1200; stroke-dashoffset: 1200; }
+		.td-active #td-thanks-text {
+			animation: td-write 2.6s .3s ease forwards, td-fillin .9s 2.7s ease forwards;
+		}
+		@keyframes td-write { to { stroke-dashoffset: 0; } }
+		@keyframes td-fillin { to { fill: var(--td-coral); } }
+		.td-thanks-sub {
+			position: absolute; top: 62%; left: 0; right: 0; text-align: center;
+			font-size: clamp(1rem, 3.8vw, 1.5rem); letter-spacing: .5em; color: var(--td-brown);
+			opacity: 0; transform: translateY(18px);
+		}
+		.td-active .td-thanks-sub { animation: td-fadeup .8s 3s ease forwards; }
+
+		/* ---- 教师卡片 ---- */
+		.td-cards-cap {
+			position: absolute; top: 9%; left: 0; right: 0; text-align: center;
+			font-family: "Ma Shan Zheng", cursive; font-size: clamp(1.4rem, 5vw, 2.2rem); color: var(--td-ink);
+			opacity: 0; transform: translateY(16px); transition: opacity .5s, transform .5s;
+		}
+		.td-cards-cap.td-show { opacity: 1; transform: none; }
+		.td-cards-row {
+			display: flex; gap: clamp(8px, 1.6vw, 20px); justify-content: center; align-items: stretch;
+			width: min(1200px, 96vw); perspective: 1200px;
+		}
+		.td-card {
+			flex: 1 1 0; min-width: 0; aspect-ratio: 3 / 4.4; max-height: 46vh;
+			border-radius: clamp(10px, 1.6vw, 18px); overflow: hidden; position: relative;
+			background: linear-gradient(160deg, #fff, #ffe9d2);
+			border: 2px solid rgba(255,140,66,.35);
+			box-shadow: 0 14px 34px rgba(192,133,82,.3);
+			display: flex; align-items: center; justify-content: center; text-align: center;
+			opacity: 0; will-change: transform;
+		}
+		.td-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+		.td-card-label {
+			position: relative; z-index: 1; padding: 10px; font-weight: 700; color: var(--td-ink);
+			font-size: clamp(.62rem, 1.7vw, 1rem); line-height: 1.5;
+		}
+		.td-card .td-card-band {
+			position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+			background: linear-gradient(transparent, rgba(91,58,41,.72));
+			color: #fff8f0; font-size: clamp(.6rem, 1.6vw, .95rem); font-weight: 700;
+			padding: 18px 6px 8px;
+		}
+		.td-card.td-dim { opacity: .25 !important; transition: opacity .4s; }
+
+		/* ---- 教师详情 ---- */
+		#td-detail {
+			position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center;
+			padding: clamp(14px, 4vw, 48px); visibility: hidden; opacity: 0;
+		}
+		#td-detail.td-show { visibility: visible; opacity: 1; transition: opacity .3s; }
+		#td-detail.td-hide { visibility: hidden; opacity: 0; transition: opacity .3s; }
+		.td-detail-grid {
+			display: grid; grid-template-columns: minmax(0, 34%) minmax(0, 1fr);
+			grid-template-rows: auto 1fr; gap: clamp(12px, 2.6vw, 30px);
+			width: min(1060px, 94vw); max-height: 86vh;
+		}
+		.td-detail-photo {
+			grid-row: 1 / 3; border-radius: 22px; overflow: hidden; position: relative;
+			background: linear-gradient(160deg, #fff, #ffe9d2);
+			border: 3px solid rgba(255,140,66,.4); box-shadow: 0 24px 60px rgba(192,133,82,.4);
+			aspect-ratio: 3/4; align-self: center;
+		}
+		.td-detail-photo img { width: 100%; height: 100%; object-fit: cover; }
+		.td-detail-photo .td-nophoto {
+			position: absolute; inset: 0; display: flex; flex-direction: column;
+			align-items: center; justify-content: center; gap: 10px; color: var(--td-brown);
+		}
+		.td-detail-main { align-self: end; }
+		.td-detail-name {
+			font-family: "Ma Shan Zheng", "ZCOOL KuaiLe", cursive;
+			font-size: clamp(1.7rem, 6vw, 3.2rem); color: var(--td-ink);
+		}
+		.td-detail-quote {
+			margin-top: 10px; display: inline-block;
+			font-size: clamp(1rem, 3.4vw, 1.5rem); color: #fff;
+			background: linear-gradient(120deg, var(--td-orange), var(--td-coral));
+			padding: 10px 18px; border-radius: 14px; box-shadow: 0 10px 26px rgba(255,111,97,.35);
+			font-weight: 700;
+		}
+		.td-detail-quote .td-qch { display: inline-block; }
+		.td-detail-facts { align-self: start; margin-top: 4px; }
+		.td-detail-facts li {
+			list-style: none; position: relative; padding-left: 1.5em;
+			font-size: clamp(.95rem, 3vw, 1.35rem); color: var(--td-ink);
+			margin: .5em 0; font-weight: 600; will-change: transform;
+		}
+		.td-detail-facts li::before {
+			content: ""; position: absolute; left: 0; top: .5em;
+			width: .6em; height: .6em; border-radius: 50%;
+			background: radial-gradient(circle at 30% 30%, var(--td-yellow), var(--td-coral));
+		}
+
+		/* ---- 结尾 ---- */
+		#td-p-ending { flex-direction: column; }
+		.td-ending-box { position: relative; z-index: 2; text-align: center; }
+		.td-ending-title {
+			font-family: "Ma Shan Zheng", cursive; font-size: clamp(2.6rem, 11vw, 5.5rem);
+			color: var(--td-ink); text-shadow: 0 4px 0 rgba(255,140,66,.2);
+		}
+		.td-ending-title .td-ch { display: inline-block; opacity: 0; transform: scale(.2) translateY(50px); }
+		.td-active .td-ending-title .td-ch {
+			animation: td-chpop .8s cubic-bezier(.34,1.9,.5,1) forwards;
+			animation-delay: calc(.4s + var(--i) * .14s);
+		}
+		.td-ending-thanks {
+			margin-top: 16px; font-size: clamp(1.2rem, 4.6vw, 2rem); font-weight: 800; letter-spacing: .12em;
+			background: linear-gradient(90deg, var(--td-orange), var(--td-coral), var(--td-yellow));
+			-webkit-background-clip: text; background-clip: text; color: transparent;
+			opacity: 0; transform: translateY(20px);
+		}
+		.td-active .td-ending-thanks { animation: td-fadeup .9s 1.3s ease forwards; }
+		.td-ending-credit { margin-top: 26px; color: #a4764f; font-size: clamp(.85rem, 3vw, 1.05rem); opacity: 0; }
+		.td-active .td-ending-credit { animation: td-fadeup .9s 2s ease forwards; }
+		.td-replay { position: absolute; top: 18px; right: 18px; z-index: 3; margin-top: 0; opacity: 0; pointer-events: none; }
+		.td-active .td-replay { opacity: 1; pointer-events: auto; transition: opacity .6s 2.4s; }
+
+		/* ---- 指示器 / 静音 ---- */
+		#td-dots {
+			position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+			display: flex; gap: 10px; z-index: 8;
+		}
+		#td-dots svg circle { transition: all .35s ease; }
+		#td-mute {
+			position: absolute; bottom: 12px; right: 14px; z-index: 8;
+			width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+			background: rgba(255,255,255,.85); color: var(--td-coral);
+			box-shadow: 0 6px 16px rgba(192,133,82,.3);
+			display: flex; align-items: center; justify-content: center;
+			transition: transform .15s;
+		}
+		#td-mute:hover { transform: scale(1.1); }
+		#td-mute:active { transform: scale(.92); }
+
+		/* ---- 移动端 ---- */
+		@media (max-width: 767px) {
+			.td-cards-row { flex-wrap: wrap; gap: 8px; align-content: center; }
+			.td-card { flex: 0 0 30%; aspect-ratio: 3/4; max-height: none; }
+			.td-detail-grid { grid-template-columns: 1fr; grid-template-rows: auto auto auto; max-height: 92vh; overflow: hidden; }
+			.td-detail-photo { grid-row: auto; width: 52%; margin: 0 auto; aspect-ratio: 1; }
+			.td-detail-main { text-align: center; }
+			.td-detail-facts { padding: 0 6px; }
+			.td-detail-facts li { margin: .35em 0; }
+		}
+	</style>
+
+	<script is:inline define:vars={{ zjUrl: zjUrl.src, zfUrl: zfUrl.src, bgmUrl }}>
+	(function () {
+		const root = document.getElementById("td-root");
+		if (!root) return;
+		// swup 重进页面时销毁旧实例
+		if (window.__td && window.__td.destroy) window.__td.destroy();
+
+		const $ = (id) => document.getElementById(id);
+		const loader = $("td-loader"), stage = $("td-stage");
+		const bar = $("td-progress-bar"), ptext = $("td-progress-text");
+		const btnRetry = $("td-retry"), btnStart = $("td-start");
+		const MOBILE = matchMedia("(max-width: 767px)").matches;
+		const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+		/* ---------- 教师数据 ---------- */
+		const PLACEHOLDER_SVG =
+			'<svg viewBox="0 0 24 24" width="64" height="64"><circle cx="12" cy="8" r="4" fill="#C08552"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="#C08552"/></svg>';
+		const TEACHERS = [
+			{ card: "语文老师（图片暂缺）", photo: null, name: "语文", quote: "说你想说的，写你想写的，这才是文学", facts: ["实力不详，应该很强"] },
+			{ card: "小甜甜数学老师（抱歉，我找不到您帅气的图片）", photo: null, name: "田维硕 · 数学", quote: "定义域！函数要注意定义域", facts: ["定义域系数学老师", "发量和学识成正相关", "讲题目的时候超绝气泡音"] },
+			{ card: "张静 · 英语", photo: zjUrl, name: "张静 · 英语", quote: "高级是什么？高级就是高中词汇", facts: ["高级的词汇，高级的英语老师", "六科中上课最风趣的老师", "欢声笑语度过每一节课堂", "下课到我办公室背单词"] },
+			{ card: "赵发 · 物理", photo: zfUrl, name: "赵发 · 物理", quote: "诶↑呀↓~ 这题送分题啊", facts: ["喜欢大呼小叫的青年教师", "据说我们这一届是他的白月光（赵发的第一次啊）", "因为太受欢迎被某个学生训练成模型（有猫娘版本哦）", "物理保命八十分系列金牌作者"] },
+			{ card: "时过境迁春还在", photo: null, name: "李佳眉 · 化学", quote: "找一位同学写一下方程式", facts: ["哪位同学借我张餐巾纸", "年轻人上课你怎么睡得着的", "我的课代表为什么睡得最香"] },
+			{ card: "朗哥（没图啊老师）", photo: null, name: "程朗 · 生物", quote: "你们必修二这本书就没学是吧", facts: ["王者荣耀区老师，每天开两把", "游龄10年，战绩可查", "认识你之前我生物简直是在白学", "好，我们来找人提问", "你这什么垃圾抽号软件"] },
+		];
+
+		/* ---------- 工具 ---------- */
+		let timers = [], rafs = [], listeners = [];
+		function after(ms, fn) { const t = setTimeout(fn, ms); timers.push(t); return t; }
+		function listen(el, ev, fn, opt) { el.addEventListener(ev, fn, opt); listeners.push([el, ev, fn, opt]); }
+		function splitChars(el) {
+			const txt = el.textContent; el.textContent = "";
+			[...txt].forEach((ch, i) => {
+				const s = document.createElement("span");
+				s.className = "td-ch"; s.style.setProperty("--i", i);
+				s.textContent = ch === " " ? " " : ch;
+				el.appendChild(s);
+			});
+		}
+		document.querySelectorAll(".td-line, .td-mline, .td-node").forEach((el, i) => {
+			el.style.setProperty("--i", el.dataset.i ?? [...el.parentElement.children].indexOf(el));
+		});
+		splitChars($("td-cover-title"));
+		splitChars($("td-ending-title"));
+
+		/* ---------- 花瓣背景 ---------- */
+		const petalsC = $("td-petals"), pctx = petalsC.getContext("2d");
+		let petals = [], petalsOn = true;
+		function sizeCanvas(c) { c.width = c.clientWidth * devicePixelRatio; c.height = c.clientHeight * devicePixelRatio; }
+		function initPetals() {
+			sizeCanvas(petalsC);
+			const N = REDUCED ? 0 : MOBILE ? 16 : 34;
+			petals = Array.from({ length: N }, () => ({
+				x: Math.random() * petalsC.width, y: Math.random() * petalsC.height,
+				r: (4 + Math.random() * 8) * devicePixelRatio,
+				vx: (Math.random() - .5) * .3, vy: .25 + Math.random() * .5,
+				rot: Math.random() * Math.PI * 2, vr: (Math.random() - .5) * .02,
+				color: ["#FF8C42", "#FF6F61", "#FFD166", "#C08552"][Math.floor(Math.random() * 4)],
+				alpha: .25 + Math.random() * .35,
+			}));
+		}
+		function tickPetals() {
+			if (!petalsOn) return;
+			pctx.clearRect(0, 0, petalsC.width, petalsC.height);
+			for (const p of petals) {
+				p.x += p.vx * devicePixelRatio; p.y += p.vy * devicePixelRatio; p.rot += p.vr;
+				if (p.y > petalsC.height + 20) { p.y = -20; p.x = Math.random() * petalsC.width; }
+				if (p.x > petalsC.width + 20) p.x = -20; if (p.x < -20) p.x = petalsC.width + 20;
+				pctx.save(); pctx.translate(p.x, p.y); pctx.rotate(p.rot); pctx.globalAlpha = p.alpha;
+				pctx.fillStyle = p.color;
+				pctx.beginPath(); pctx.ellipse(0, 0, p.r, p.r * .55, 0, 0, Math.PI * 2); pctx.fill();
+				pctx.restore();
+			}
+			rafs.push(requestAnimationFrame(tickPetals));
+		}
+		initPetals(); tickPetals();
+		listen(window, "resize", () => { sizeCanvas(petalsC); sizeCanvas(fwC); });
+
+		/* ---------- 预加载 ---------- */
+		const audio = new Audio();
+		audio.loop = false; audio.preload = "auto";
+		let actx = null, analyser = null, freq = null, audioReady = false;
+
+		function loadImage(url) {
+			return new Promise((res, rej) => {
+				const im = new Image();
+				im.onload = () => res(url); im.onerror = rej; im.src = url;
+			});
+		}
+		function loadAudio(url, onProg) {
+			return fetch(url).then((r) => {
+				if (!r.ok) throw new Error("audio fetch failed");
+				const total = +r.headers.get("content-length") || 976531;
+				const reader = r.body.getReader();
+				const chunks = []; let got = 0;
+				function step() {
+					return reader.read().then(({ done, value }) => {
+						if (done) {
+							const blob = new Blob(chunks, { type: "audio/mpeg" });
+							return URL.createObjectURL(blob);
+						}
+						chunks.push(value); got += value.length;
+						onProg(got / total);
+						return step();
+					});
+				}
+				return step();
+			});
+		}
+
+		let loadedFlag = false;
+		const t0load = performance.now();
+		function setProgress(p) {
+			p = Math.min(1, p);
+			bar.style.width = (p * 100).toFixed(0) + "%";
+			ptext.textContent = "正在准备惊喜… " + (p * 100).toFixed(0) + "%";
+		}
+		function preload() {
+			loadedFlag = false;
+			btnRetry.hidden = true; btnStart.hidden = true;
+			ptext.hidden = false; setProgress(0);
+			let imgDone = 0, audioProg = 0;
+			const update = () => setProgress((imgDone / 2) * 0.35 + audioProg * 0.65);
+			const jobs = [
+				loadImage(zjUrl).then(() => { imgDone++; update(); }),
+				loadImage(zfUrl).then(() => { imgDone++; update(); }),
+				loadAudio(bgmUrl, (p) => { audioProg = p; update(); }),
+				document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve(),
+			];
+			// 字体不阻塞成败
+			Promise.all(jobs.slice(0, 3)).then((results) => {
+				const wait = Math.max(0, 1500 - (performance.now() - t0load));
+				after(wait, () => {
+					audio.src = results[2]; // blob URL，保证音频已完整缓存
+					audioReady = true; loadedFlag = true;
+					setProgress(1);
+					ptext.hidden = true;
+					btnStart.hidden = false;
+				});
+			}).catch(() => {
+				ptext.textContent = "部分资源加载失败…";
+				btnRetry.hidden = false;
+			});
+		}
+		listen(btnRetry, "click", preload);
+		preload();
+
+		/* ---------- 交互锁定 ---------- */
+		let locked = true;
+		function block(e) { if (locked) { e.preventDefault(); e.stopPropagation(); } }
+		function lockAll() {
+			locked = true;
+			listen(window, "wheel", block, { passive: false, capture: true });
+			listen(window, "touchmove", block, { passive: false, capture: true });
+			listen(window, "keydown", block, { capture: true });
+			document.body.style.overflow = "hidden";
+		}
+		function unlockAll() { locked = false; }
+
+		/* ---------- 页面指示器 ---------- */
+		const dotsEl = $("td-dots");
+		const DOTS = 7;
+		function buildDots() {
+			dotsEl.innerHTML = "";
+			for (let i = 0; i < DOTS; i++) {
+				const ns = "http://www.w3.org/2000/svg";
+				const s = document.createElementNS(ns, "svg");
+				s.setAttribute("width", "14"); s.setAttribute("height", "14"); s.setAttribute("viewBox", "0 0 14 14");
+				const c = document.createElementNS(ns, "circle");
+				c.setAttribute("cx", "7"); c.setAttribute("cy", "7"); c.setAttribute("r", "4");
+				c.setAttribute("fill", "rgba(192,133,82,.35)");
+				s.appendChild(c); dotsEl.appendChild(s);
+			}
+		}
+		function setDot(i) {
+			[...dotsEl.children].forEach((s, j) => {
+				const c = s.firstChild;
+				if (j === i) { c.setAttribute("fill", "#FF6F61"); c.setAttribute("r", "5.5"); }
+				else { c.setAttribute("fill", "rgba(192,133,82,.35)"); c.setAttribute("r", "4"); }
+			});
+		}
+		buildDots();
+
+		/* ---------- 页面切换 ---------- */
+		const pages = {
+			cover: $("td-p-cover"), open: $("td-p-open"), memory: $("td-p-memory"),
+			growth: $("td-p-growth"), thanks: $("td-p-thanks"), cards: $("td-p-cards"),
+			ending: $("td-p-ending"),
+		};
+		let currentPage = null;
+		function showPage(key, dot) {
+			if (currentPage) pages[currentPage].classList.remove("td-active");
+			currentPage = key;
+			if (key) pages[key].classList.add("td-active");
+			if (dot != null) setDot(dot);
+		}
+
+		/* ---------- 卡片构建 ---------- */
+		const row = $("td-cards-row");
+		const cardEls = TEACHERS.map((t, i) => {
+			const d = document.createElement("div");
+			d.className = "td-card";
+			if (t.photo) {
+				d.innerHTML = `<img src="${t.photo}" alt="${t.name}"><div class="td-card-band">${t.name}</div>`;
+			} else {
+				d.innerHTML = `<div class="td-card-label">${t.card}</div>`;
+			}
+			row.appendChild(d);
+			return d;
+		});
+
+		/* ---------- 卡片编排：飞入→聚拢→洗牌→发牌 ---------- */
+		let cardHomes = null;
+		// 记录每张卡当前位移/旋转，保证动画首尾相接
+		const cardState = cardEls.map(() => ({ x: 0, y: 0, rot: 0 }));
+		function moveCard(i, tx, ty, rot, dur, delay, ease) {
+			const s = cardState[i];
+			const from = `translate(${s.x}px,${s.y}px) rotate(${s.rot}deg)`;
+			const to = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
+			s.x = tx; s.y = ty; s.rot = rot;
+			return cardEls[i].animate(
+				[{ transform: from }, { transform: to }],
+				{ duration: dur, delay: delay || 0, easing: ease || "cubic-bezier(.5,0,.2,1)", fill: "forwards" }
+			).finished.catch(() => {});
+		}
+		function cardsIn(dur) {
+			$("td-cards-cap").classList.add("td-show");
+			cardEls.forEach((c, i) => {
+				c.animate(
+					[
+						{ transform: "translateY(70vh) rotate(" + (i % 2 ? 18 : -18) + "deg) scale(.6)", opacity: 0 },
+						{ transform: "translateY(-3%) rotate(0deg) scale(1.04)", opacity: 1, offset: .75 },
+						{ transform: "translateY(0) rotate(0) scale(1)", opacity: 1 },
+					],
+					{ duration: dur * 0.55, delay: i * dur * 0.07, easing: "cubic-bezier(.3,1.4,.5,1)", fill: "forwards" }
+				);
+			});
+		}
+		function captureHomes() {
+			cardHomes = cardEls.map((c) => c.getBoundingClientRect());
+		}
+		function center() { return { x: innerWidth / 2, y: innerHeight / 2 }; }
+		// 目标点换算为相对卡片 home 中心的位移
+		function deltaTo(i, tx, ty) {
+			const h = cardHomes[i];
+			return [tx - (h.left + h.width / 2), ty - (h.top + h.height / 2)];
+		}
+		async function cardsGather(dur) {
+			captureHomes();
+			const ct = center();
+			await Promise.all(cardEls.map((c, i) => {
+				const [dx, dy] = deltaTo(i, ct.x + (i - 2.5) * 8, ct.y + (i - 2.5) * 6);
+				return moveCard(i, dx, dy, (i - 2.5) * 7, dur, i * 40);
+			}));
+		}
+		async function cardsShuffle(rounds, dur) {
+			const ct = center();
+			for (let r = 0; r < rounds; r++) {
+				await Promise.all(cardEls.map((c, i) => {
+					const a = (i / 6) * Math.PI * 2 + r * 1.1 + Math.random() * .5;
+					const R = Math.min(innerWidth, innerHeight) * (0.16 + Math.random() * 0.1);
+					const [dx, dy] = deltaTo(i, ct.x + Math.cos(a) * R, ct.y + Math.sin(a) * R * .7);
+					return moveCard(i, dx, dy, (Math.random() - .5) * 50, dur * 0.45, i * 25, "cubic-bezier(.6,-0.2,.3,1.3)");
+				}));
+			}
+		}
+		async function cardsDeal(dur) {
+			// 从洗牌位置按顺序弹回原位
+			for (let i = 0; i < cardEls.length; i++) {
+				moveCard(i, 0, 0, 0, dur * 0.5, 0, "cubic-bezier(.3,1.5,.5,1)");
+				await new Promise((r) => after(dur * 0.5 / 6 + 60, r));
+			}
+			await new Promise((r) => after(dur * 0.5, r));
+		}
+
+		/* ---------- 教师详情 + 弹簧律动 ---------- */
+		const detail = $("td-detail"), dPhoto = $("td-detail-photo"),
+			dName = $("td-detail-name"), dQuote = $("td-detail-quote"), dFacts = $("td-detail-facts");
+		let springLines = [], springOn = false;
+
+		function bassEnergy() {
+			if (!analyser) return 0;
+			analyser.getByteFrequencyData(freq);
+			let s = 0; const n = Math.min(10, freq.length);
+			for (let i = 2; i < n; i++) s += freq[i];
+			return s / ((n - 2) * 255);
+		}
+		let smoothE = 0;
+		function tickSprings() {
+			if (!springOn) return;
+			const e = bassEnergy();
+			smoothE += (e - smoothE) * 0.25;
+			const t = performance.now() / 1000;
+			for (const L of springLines) {
+				// 目标：音乐能量 + 呼吸正弦；弹簧阻尼追踪
+				const target = 1 + smoothE * 0.22 * L.amp + Math.sin(t * 2.2 + L.phase) * 0.02;
+				const targetY = -(smoothE * 14 * L.amp) + Math.sin(t * 2.2 + L.phase) * 3;
+				L.v += (target - L.x) * L.k; L.v *= L.damp; L.x += L.v;
+				L.vy += (targetY - L.y) * L.k; L.vy *= L.damp; L.y += L.vy;
+				L.el.style.transform = `translateY(${L.y.toFixed(2)}px) scale(${L.x.toFixed(3)})`;
+			}
+			rafs.push(requestAnimationFrame(tickSprings));
+		}
+		function makeSpring(el, i) {
+			return { el, x: 1, y: 0, v: 0, vy: 0, k: 0.09 + (i % 4) * 0.015, damp: 0.78, phase: i * 0.9, amp: 0.7 + (i % 3) * 0.35 };
+		}
+
+		async function showTeacher(i, dur) {
+			const t = TEACHERS[i];
+			cardEls.forEach((c, j) => c.classList.toggle("td-dim", j !== i));
+			// 内容填充
+			dPhoto.innerHTML = t.photo
+				? `<img src="${t.photo}" alt="${t.name}">`
+				: `<div class="td-nophoto">${PLACEHOLDER_SVG}<span>照片敬请期待</span></div>`;
+			dName.textContent = t.name;
+			dQuote.innerHTML = "";
+			[...t.quote].forEach((ch) => {
+				const s = document.createElement("span");
+				s.className = "td-qch"; s.textContent = ch === " " ? " " : ch;
+				dQuote.appendChild(s);
+			});
+			dFacts.innerHTML = "";
+			t.facts.forEach((f) => {
+				const li = document.createElement("li"); li.textContent = f; dFacts.appendChild(li);
+			});
+
+			// 卡片飞入详情位
+			const home = cardHomes ? cardHomes[i] : cardEls[i].getBoundingClientRect();
+			detail.classList.add("td-show");
+			detail.style.opacity = "0";
+			const target = dPhoto.getBoundingClientRect();
+			detail.style.opacity = "";
+			const fly = document.createElement("div");
+			fly.style.cssText = `position:fixed;z-index:70;left:${home.left}px;top:${home.top}px;width:${home.width}px;height:${home.height}px;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(192,133,82,.45);`;
+			fly.innerHTML = t.photo
+				? `<img src="${t.photo}" style="width:100%;height:100%;object-fit:cover">`
+				: `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#fff,#ffe9d2);padding:8px;text-align:center;font-weight:700;color:#5b3a29;font-size:14px">${t.card}</div>`;
+			stage.appendChild(fly);
+			const anim = fly.animate(
+				[
+					{ left: home.left + "px", top: home.top + "px", width: home.width + "px", height: home.height + "px", transform: "rotate(0deg)" },
+					{ left: target.left + "px", top: target.top + "px", width: target.width + "px", height: target.height + "px", transform: "rotate(3deg)" },
+				],
+				{ duration: dur * 0.24, easing: "cubic-bezier(.45,1.4,.45,1)", fill: "forwards" }
+			);
+			await anim.finished.catch(() => {});
+			fly.remove();
+
+			// 详情内容入场
+			const qchs = dQuote.querySelectorAll(".td-qch");
+			const inAnims = [];
+			inAnims.push(dPhoto.animate(
+				[{ opacity: 0, transform: "scale(.92)" }, { opacity: 1, transform: "scale(1)" }],
+				{ duration: dur * 0.14, easing: "ease-out", fill: "forwards" }));
+			inAnims.push(dName.animate(
+				[{ opacity: 0, transform: "translateX(60px) scale(.8)" }, { opacity: 1, transform: "translateX(0) scale(1.06)", offset: .7 }, { opacity: 1, transform: "translateX(0) scale(1)" }],
+				{ duration: dur * 0.16, delay: dur * 0.05, easing: "cubic-bezier(.3,1.5,.5,1)", fill: "forwards" }));
+			qchs.forEach((s, j) => inAnims.push(s.animate(
+				[{ opacity: 0, transform: "translateY(20px) scale(.4)" }, { opacity: 1, transform: "translateY(0) scale(1)" }],
+				{ duration: dur * 0.1, delay: dur * 0.12 + j * 28, easing: "cubic-bezier(.3,1.8,.5,1)", fill: "forwards" })));
+			const lis = dFacts.querySelectorAll("li");
+			lis.forEach((li, j) => inAnims.push(li.animate(
+				[{ opacity: 0, transform: "translateX(-50px) scale(.7)" }, { opacity: 1, transform: "translateX(0) scale(1)" }],
+				{ duration: dur * 0.12, delay: dur * 0.2 + j * dur * 0.055, easing: "cubic-bezier(.3,1.7,.5,1)", fill: "forwards" })));
+			await Promise.all(inAnims.map((a) => a.finished.catch(() => {})));
+
+			// 弹簧律动（跟随 BGM 低频能量）
+			springLines = [dName, dQuote, ...lis].map((el, j) => makeSpring(el, j));
+			if (!springOn) { springOn = true; tickSprings(); }
+
+			// 停留
+			await new Promise((r) => after(dur * 0.5, r));
+
+			// 退出
+			springLines = [];
+			await Promise.all([
+				detail.animate([{ opacity: 1 }, { opacity: 0 }], { duration: dur * 0.12, fill: "forwards" }).finished.catch(() => {}),
+				...[dName, dQuote, ...lis].map((el, j) => el.animate(
+					[{ opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(30px)" }],
+					{ duration: dur * 0.1, delay: j * 30, fill: "forwards" }).finished.catch(() => {})),
+			]);
+			detail.classList.remove("td-show");
+			detail.classList.add("td-hide");
+			[dName, dQuote, ...lis].forEach((el) => { el.style.transform = ""; el.style.opacity = ""; });
+			detail.getAnimations().forEach((a) => a.cancel());
+			detail.classList.remove("td-hide");
+			await new Promise((r) => after(dur * 0.04, r));
+		}
+
+		/* ---------- 结尾烟花 ---------- */
+		const fwC = $("td-fireworks"), fctx = fwC.getContext("2d");
+		let fwOn = false, fwParts = [], fwRockets = [], fwLast = 0;
+		const FW_COLORS = ["#FF8C42", "#FF6F61", "#FFD166", "#C08552", "#FFE8CC"];
+		function launchRocket() {
+			fwRockets.push({
+				x: fwC.width * (0.15 + Math.random() * 0.7), y: fwC.height + 10,
+				vy: -(fwC.height * (0.011 + Math.random() * 0.004)),
+				color: FW_COLORS[Math.floor(Math.random() * FW_COLORS.length)],
+			});
+		}
+		function explode(x, y, color) {
+			const N = MOBILE ? 40 : 70;
+			for (let i = 0; i < N; i++) {
+				const a = (i / N) * Math.PI * 2 + Math.random() * .3;
+				const sp = (1.5 + Math.random() * 3.5) * devicePixelRatio;
+				fwParts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, decay: .008 + Math.random() * .012, color });
+			}
+		}
+		function tickFireworks(now) {
+			if (!fwOn) return;
+			fctx.clearRect(0, 0, fwC.width, fwC.height);
+			if (now - fwLast > (MOBILE ? 900 : 550)) { fwLast = now; launchRocket(); if (Math.random() < .4) launchRocket(); }
+			fwRockets = fwRockets.filter((r) => {
+				r.y += r.vy;
+				fctx.globalAlpha = 1; fctx.fillStyle = r.color;
+				fctx.beginPath(); fctx.arc(r.x, r.y, 2.5 * devicePixelRatio, 0, Math.PI * 2); fctx.fill();
+				if (r.y < fwC.height * (0.2 + Math.random() * 0.25)) { explode(r.x, r.y, r.color); return false; }
+				return true;
+			});
+			fwParts = fwParts.filter((p) => {
+				p.x += p.vx; p.y += p.vy; p.vy += 0.03 * devicePixelRatio; p.vx *= .99; p.life -= p.decay;
+				if (p.life <= 0) return false;
+				fctx.globalAlpha = p.life; fctx.fillStyle = p.color;
+				fctx.beginPath(); fctx.arc(p.x, p.y, 2 * devicePixelRatio * p.life + .5, 0, Math.PI * 2); fctx.fill();
+				return true;
+			});
+			fctx.globalAlpha = 1;
+			rafs.push(requestAnimationFrame(tickFireworks));
+		}
+
+		/* ---------- 主时间轴（缩放到 BGM 时长 - 10s 结尾） ---------- */
+		let t0 = 0, masterOn = false, schedule = [];
+		const ENDING_HOLD = 10; // 结尾页占用音频最后 10 秒
+		function buildSchedule() {
+			const D = isFinite(audio.duration) && audio.duration > 20 ? audio.duration : 61.008;
+			const main = D - ENDING_HOLD;
+			const W = [
+				["intro", 1.0], ["cover", 4.5], ["open", 4.5], ["memory", 4.0],
+				["growth", 4.0], ["thanks", 3.5], ["cards", 7.5],
+				...TEACHERS.map((_, i) => ["teacher" + i, 4.0]),
+			];
+			const sum = W.reduce((s, w) => s + w[1], 0);
+			const scale = main / sum;
+			let acc = 0;
+			schedule = W.map(([key, w]) => {
+				const start = acc; acc += w * scale;
+				return { key, start, dur: w * scale };
+			});
+		}
+		const fired = new Set();
+		function at(key) { return schedule.find((s) => s.key === key); }
+
+		function runPhase(key, dur) {
+			switch (key) {
+				case "intro": {
+					// 导航栏向上滑出
+					const nav = document.getElementById("navbar-wrapper");
+					if (nav) {
+						nav.style.transition = "transform .9s cubic-bezier(.6,0,.8,.4), opacity .9s";
+						nav.style.transform = "translateY(-130%)";
+						nav.style.opacity = "0";
+					}
+					showPage(null, 0);
+					break;
+				}
+				case "cover": showPage("cover", 0); break;
+				case "open": showPage("open", 1); break;
+				case "memory": showPage("memory", 2); break;
+				case "growth": showPage("growth", 3); break;
+				case "thanks": showPage("thanks", 4); break;
+				case "cards": {
+					showPage("cards", 5);
+					cardsIn(dur * 1000);
+					const ms = dur * 1000;
+					after(ms * 0.34, () => captureHomes());
+					after(ms * 0.36, () => cardsGather(ms * 0.1));
+					after(ms * 0.48, () => cardsShuffle(2, ms * 0.3));
+					after(ms * 0.8, () => cardsDeal(ms * 0.2));
+					break;
+				}
+				case "ending": {
+					showPage("ending", 6);
+					sizeCanvas(fwC);
+					if (!fwOn) { fwOn = true; fwLast = 0; rafs.push(requestAnimationFrame(tickFireworks)); }
+					unlockAll(); // 动效结束，解锁交互
+					break;
+				}
+				default: {
+					if (key.startsWith("teacher")) {
+						showPage("cards", 5);
+						$("td-cards-cap").classList.remove("td-show");
+						showTeacher(+key.slice(7), dur * 1000);
+					}
+				}
+			}
+		}
+
+		function tickMaster() {
+			if (!masterOn) return;
+			const t = (performance.now() - t0) / 1000;
+			for (const ph of schedule) {
+				if (t >= ph.start && !fired.has(ph.key)) {
+					fired.add(ph.key);
+					runPhase(ph.key, ph.dur);
+				}
+			}
+			rafs.push(requestAnimationFrame(tickMaster));
+		}
+
+		function startShow() {
+			buildSchedule();
+			fired.clear();
+			// 重置状态
+			detail.classList.remove("td-show");
+			springLines = [];
+			fwOn = false; fwParts = []; fwRockets = [];
+			fctx && fctx.clearRect(0, 0, fwC.width, fwC.height);
+			cardEls.forEach((c, i) => { c.getAnimations().forEach((a) => a.cancel()); c.style.transform = ""; c.style.transition = ""; c.classList.remove("td-dim"); c.style.opacity = 0; cardState[i].x = 0; cardState[i].y = 0; cardState[i].rot = 0; });
+			$("td-cards-cap").classList.remove("td-show");
+			if (currentPage) { pages[currentPage].classList.remove("td-active"); currentPage = null; }
+			lockAll();
+
+			audio.currentTime = 0;
+			audio.play().catch(() => {});
+			t0 = performance.now();
+			masterOn = true;
+			tickMaster();
+		}
+
+		/* ---------- 开始按钮：解锁音频自动播放 ---------- */
+		listen(btnStart, "click", () => {
+			if (!audioReady) return;
+			// Web Audio 用于弹簧律动取低频能量
+			try {
+				if (!actx) {
+					actx = new (window.AudioContext || window.webkitAudioContext)();
+					const src = actx.createMediaElementSource(audio);
+					analyser = actx.createAnalyser();
+					analyser.fftSize = 128;
+					src.connect(analyser); analyser.connect(actx.destination);
+					freq = new Uint8Array(analyser.frequencyBinCount);
+				}
+				actx.resume();
+			} catch (e) { /* 律动退化为纯呼吸 */ }
+			loader.classList.add("td-gone");
+			stage.classList.add("td-on");
+			stage.setAttribute("aria-hidden", "false");
+			startShow();
+		});
+
+		/* ---------- 重播 ---------- */
+		listen($("td-replay"), "click", () => {
+			startShow(); // 资源已缓存，直接重播主内容，音乐从头播放
+		});
+
+		/* ---------- 静音 ---------- */
+		listen($("td-mute"), "click", () => {
+			audio.muted = !audio.muted;
+			$("td-icon-sound").style.display = audio.muted ? "none" : "";
+			$("td-icon-mute").style.display = audio.muted ? "" : "none";
+		});
+
+		/* ---------- 销毁（swup 换页） ---------- */
+		window.__td = {
+			destroy() {
+				masterOn = false; springOn = false; petalsOn = false; fwOn = false;
+				timers.forEach(clearTimeout); timers = [];
+				rafs.forEach(cancelAnimationFrame); rafs = [];
+				listeners.forEach(([el, ev, fn, opt]) => el.removeEventListener(ev, fn, opt)); listeners = [];
+				try { audio.pause(); audio.src = ""; } catch (e) {}
+				document.body.style.overflow = "";
+			},
+		};
+		if (window.swup && window.swup.hooks) {
+			window.swup.hooks.on("content:replace", () => {
+				if (window.__td) { window.__td.destroy(); window.__td = null; }
+			});
+		}
+	})();
+	</script>
 </BlankLayout>
