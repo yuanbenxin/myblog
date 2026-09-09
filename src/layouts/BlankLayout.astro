@@ -1,0 +1,32 @@
+---
+import Navbar from "@components/Navbar.astro";
+import Layout from "./Layout.astro";
+
+interface Props {
+	title?: string;
+	banner?: string;
+	description?: string;
+	lang?: string;
+}
+
+const { title, banner, description, lang } = Astro.props;
+---
+
+<Layout title={title} banner={banner} description={description} lang={lang}>
+	<slot slot="head" name="head"></slot>
+	<div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto">
+		<div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
+			<Navbar></Navbar>
+		</div>
+	</div>
+
+	<!-- Only the navbar, no sidebar/banner/toc/footer -->
+	<main id="swup-container" class="transition-swup-fade">
+		<div id="content-wrapper" class="max-w-[var(--page-width)] mx-auto px-4">
+			<slot></slot>
+		</div>
+	</main>
+
+	<!-- #toc needs to exist for Swup to work normally -->
+	<div id="toc" class="hidden"></div>
+</Layout>
